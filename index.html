@@ -88,7 +88,7 @@ Quid agis? — How are you?"></textarea>
             <button class="btn secondary" id="loadUrlBtn" title="Fetch cards from a URL">Load from URL…</button>
             <input type="file" id="fileInput" accept=".json,.csv,.txt" style="display:none" />
           </div>
-          <p class="small muted">Accepted formats: <b>JSON</b> (array of {q,a}), <b>CSV</b> (columns <code>q,a</code>), or plain text lines like <code>prompt = translation</code>.</p>
+          <p class="small muted">Accepted: <b>JSON</b> (array of {q,a}), <b>CSV</b> (header <code>q,a</code>), or plain text like <code>prompt = translation</code>.</p>
         </div>
       </details>
 
@@ -106,6 +106,13 @@ Quid agis? — How are you?"></textarea>
       { q: "Dic 'sōl est.'", a: "Say 'it is the sun.'" },
       { q: "Quot gladīī sunt?", a: "How many swords are there?" },
       { q: "Unus gladius est.", a: "There is one sword." },
+    ];
+
+    // ---- Random deck sources (edit these to your filenames)
+    const DECK_URLS = [
+      'decks/set-animals.txt',
+      'decks/set-body.txt',
+      'decks/set-commands.txt'
     ];
 
     // ---------------------------
@@ -219,9 +226,21 @@ Quid agis? — How are you?"></textarea>
     // Import / Export helpers (paste box)
     const bulkInput = el('bulkInput');
     el('importBtn').addEventListener('click', () => {
-      const parsed = parseLinesToDeck(bulkInput.value);
-      if(parsed.length){ deck = parsed; rebuildOrder(); }
-      else alert('Could not find any “prompt = translation” lines to import.');
+      const lines = bulkInput.value.split(/\n+/).map(s=>s.trim()).filter(Boolean);
+      const parsed = [];
+      for(const line of lines){
+        const parts = line.split(/\s*(?:=|—|-|:)\s*/);
+        if(parts.length>=2){
+          const q = parts[0].trim();
+          const a = parts.slice(1).join(' - ').trim();
+          if(q && a) parsed.push({q,a});
+        }
+      }
+      if(parsed.length){
+        deck = parsed; rebuildOrder();
+      } else {
+        alert('Could not find any “prompt = translation” lines to import.');
+      }
     });
 
     el('exportBtn').addEventListener('click', async () => {
@@ -230,7 +249,6 @@ Quid agis? — How are you?"></textarea>
         await navigator.clipboard.writeText(text);
         alert('Deck copied to clipboard!');
       }catch{
-        // fallback download
         const blob = new Blob([text], {type:'text/plain'});
         const a=document.createElement('a');
         a.href = URL.createObjectURL(blob);
@@ -256,9 +274,7 @@ Quid agis? — How are you?"></textarea>
     function parseCSVToDeck(text){
       const rows = text.split(/\r?\n/).filter(Boolean);
       if(!rows.length) return [];
-      const splitCSV = (line)=> line
-        .split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
-        .map(s=>s.replace(/^"|"$/g,'').trim());
+      const splitCSV = (line)=> line.split(',').map(s=>s.replace(/^"|"$/g,'').trim());
       const header = splitCSV(rows[0]).map(h=>h.toLowerCase());
       const qi = header.indexOf('q'); const ai = header.indexOf('a');
       if(qi===-1 || ai===-1) return [];
@@ -274,7 +290,7 @@ Quid agis? — How are you?"></textarea>
       try{
         const data = JSON.parse(text);
         if(Array.isArray(data)) return data
-          .map(x=>({q: x.q ?? x.front ?? x.prompt, a: x.a ?? x.back ?? x.answer}))
+          .map(x=>({q: x.q || x.front || x.prompt, a: x.a || x.back || x.answer}))
           .filter(x=>x.q && x.a);
       }catch{}
       return [];
@@ -286,8 +302,7 @@ Quid agis? — How are you?"></textarea>
       if(!parsed.length) parsed = parseJSONToDeck(text);
       if(!parsed.length) parsed = parseCSVToDeck(text);
       if(!parsed.length) parsed = parseLinesToDeck(text);
-      if(parsed.length){ deck = parsed; rebuildOrder(); }
-      else alert('Could not parse any cards from the provided ' + (hint||'data') + '.');
+      return parsed;
     }
 
     // -------- File/URL loading --------
@@ -305,7 +320,9 @@ Quid agis? — How are you?"></textarea>
         reader.onload = () => {
           const ext = (f.name.split('.').pop()||'').toLowerCase();
           const hint = ['json','csv'].includes(ext) ? ext : undefined;
-          loadDeckFromText(String(reader.result||''), hint);
+          const parsed = loadDeckFromText(String(reader.result||''), hint);
+          if(parsed.length){ deck = parsed; rebuildOrder(); }
+          else alert('Could not parse any cards from file.');
         };
         reader.readAsText(f);
         fileInput.value = '';
@@ -322,15 +339,35 @@ Quid agis? — How are you?"></textarea>
           const text = await res.text();
           const m = url.toLowerCase().match(/\.([a-z0-9]+)(?:\?|#|$)/);
           const hint = m ? m[1] : undefined;
-          loadDeckFromText(text, hint);
+          const parsed = loadDeckFromText(text, hint);
+          if(parsed.length){ deck = parsed; rebuildOrder(); }
+          else alert('Could not parse any cards from URL.');
         }catch(err){
           alert('Fetch failed: '+err+'\nIf loading a local file over file://, start a local server (e.g. `python -m http.server`) and try http://localhost/. Also ensure the remote server allows CORS.');
         }
       });
     }
 
-    // First render
+    // Random deck on page load; fallback to built-in deck
+    async function loadRandomDeckFromUrls(){
+      if(!Array.isArray(DECK_URLS) || !DECK_URLS.length) return false;
+      const pick = DECK_URLS[Math.floor(Math.random()*DECK_URLS.length)];
+      try{
+        const res = await fetch(pick, {cache:'no-store'});
+        if(!res.ok) throw new Error(res.status+' '+res.statusText);
+        const text = await res.text();
+        const m = pick.toLowerCase().match(/\.([a-z0-9]+)(?:\?|#|$)/);
+        const hint = m ? m[1] : undefined;
+        const parsed = loadDeckFromText(text, hint);
+        if(parsed.length){ deck = parsed; rebuildOrder(); return true; }
+      }catch(e){ console.warn('Random deck load failed:', e); }
+      return false;
+    }
+
+    // First render + try random deck
     rebuildOrder();
+    loadRandomDeckFromUrls();
+
   </script>
 </body>
 </html>
