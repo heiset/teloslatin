@@ -92,7 +92,6 @@ Quid agis? — How are you?"></textarea>
   <script>
     // ---------------------------
     // 1) Your data lives here 👇
-    // Edit this array, or use the importer below. Each item is { q: "prompt", a: "translation" }
     let deck = [
       { q: "Ī ad popīnam pedibus.", a: "Go to the restaurant on foot." },
       { q: "Ī ad librāriam bīrotā.", a: "Go to the bookstore by bike." },
@@ -101,12 +100,8 @@ Quid agis? — How are you?"></textarea>
       { q: "Unus gladius est.", a: "There is one sword." },
     ];
 
-    // ---- Random deck sources (edit these to your filenames)
-    const DECK_URLS = [
-      'decks/b1.txt',
-      'decks/b2.txt',
-      'decks/b3.txt'
-    ];
+    // ---- Random deck sources: auto-generate b1–b20
+    const DECK_URLS = Array.from({length: 20}, (_, i) => `decks/b${i+1}.txt`);
 
     // ---------------------------
     // 2) App state
@@ -122,10 +117,9 @@ Quid agis? — How are you?"></textarea>
     const prog = el('prog');
 
     let order = deck.map((_, i) => i);
-    let idx = 0;             // which card in the order
-    let showingA = false;    // false = show prompt; true = show translation
+    let idx = 0;
+    let showingA = false;
 
-    // Restore toggles from localStorage
     shuffleChk.checked = localStorage.getItem('tinyfc_shuffle') === '1';
     loopChk.checked    = localStorage.getItem('tinyfc_loop')    !== '0';
 
@@ -275,4 +269,3 @@ Quid agis? — How are you?"></textarea>
   </script>
 </body>
 </html>
-
