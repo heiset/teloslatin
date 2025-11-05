@@ -82,6 +82,13 @@ Quid agis? — How are you?"></textarea>
             <button class="btn success" id="importBtn">Import</button>
             <button class="btn secondary" id="exportBtn" title="Copy current deck as text">Export</button>
           </div>
+
+          <div class="row" style="margin-top:8px">
+            <button class="btn secondary" id="loadFileBtn" title="Load a local file of cards">Load file…</button>
+            <button class="btn secondary" id="loadUrlBtn" title="Fetch cards from a URL">Load from URL…</button>
+            <input type="file" id="fileInput" accept=".json,.csv,.txt" style="display:none" />
+          </div>
+          <p class="small muted">Accepted formats: <b>JSON</b> (array of {q,a}), <b>CSV</b> (columns <code>q,a</code>), or plain text lines like <code>prompt = translation</code>.</p>
         </div>
       </details>
 
@@ -209,25 +216,12 @@ Quid agis? — How are you?"></textarea>
       if(e.key === 'ArrowLeft'){ e.preventDefault(); prev(); }
     });
 
-    // Import / Export helpers
+    // Import / Export helpers (paste box)
     const bulkInput = el('bulkInput');
     el('importBtn').addEventListener('click', () => {
-      const lines = bulkInput.value.split(/\n+/).map(s=>s.trim()).filter(Boolean);
-      const parsed = [];
-      for(const line of lines){
-        // split on common separators: =, — (em dash), -, :
-        const parts = line.split(/\s*(?:=|—|-|:)\s*/);
-        if(parts.length>=2){
-          const q = parts[0].trim();
-          const a = parts.slice(1).join(' - ').trim();
-          if(q && a) parsed.push({q,a});
-        }
-      }
-      if(parsed.length){
-        deck = parsed; rebuildOrder();
-      } else {
-        alert('Could not find any “prompt = translation” lines to import.');
-      }
+      const parsed = parseLinesToDeck(bulkInput.value);
+      if(parsed.length){ deck = parsed; rebuildOrder(); }
+      else alert('Could not find any “prompt = translation” lines to import.');
     });
 
     el('exportBtn').addEventListener('click', async () => {
@@ -244,6 +238,96 @@ Quid agis? — How are you?"></textarea>
         document.body.appendChild(a); a.click(); a.remove();
       }
     });
+
+    // -------- Parsers for external sources --------
+    function parseLinesToDeck(text){
+      const lines = text.split(/\n+/).map(s=>s.trim()).filter(Boolean);
+      const out = [];
+      for(const line of lines){
+        const parts = line.split(/\s*(?:=|—|-|:)\s*/);
+        if(parts.length>=2){
+          const q = parts[0].trim();
+          const a = parts.slice(1).join(' - ').trim();
+          if(q && a) out.push({q,a});
+        }
+      }
+      return out;
+    }
+    function parseCSVToDeck(text){
+      const rows = text.split(/\r?\n/).filter(Boolean);
+      if(!rows.length) return [];
+      const splitCSV = (line)=> line
+        .split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
+        .map(s=>s.replace(/^"|"$/g,'').trim());
+      const header = splitCSV(rows[0]).map(h=>h.toLowerCase());
+      const qi = header.indexOf('q'); const ai = header.indexOf('a');
+      if(qi===-1 || ai===-1) return [];
+      const out = [];
+      for(let i=1;i<rows.length;i++){
+        const cols = splitCSV(rows[i]);
+        const q = cols[qi]; const a = cols[ai];
+        if(q && a) out.push({q,a});
+      }
+      return out;
+    }
+    function parseJSONToDeck(text){
+      try{
+        const data = JSON.parse(text);
+        if(Array.isArray(data)) return data
+          .map(x=>({q: x.q ?? x.front ?? x.prompt, a: x.a ?? x.back ?? x.answer}))
+          .filter(x=>x.q && x.a);
+      }catch{}
+      return [];
+    }
+    function loadDeckFromText(text, hint){
+      let parsed = [];
+      if(hint==='json') parsed = parseJSONToDeck(text);
+      if(!parsed.length && hint==='csv') parsed = parseCSVToDeck(text);
+      if(!parsed.length) parsed = parseJSONToDeck(text);
+      if(!parsed.length) parsed = parseCSVToDeck(text);
+      if(!parsed.length) parsed = parseLinesToDeck(text);
+      if(parsed.length){ deck = parsed; rebuildOrder(); }
+      else alert('Could not parse any cards from the provided ' + (hint||'data') + '.');
+    }
+
+    // -------- File/URL loading --------
+    const fileInput = el('fileInput');
+    const loadFileBtn = el('loadFileBtn');
+    const loadUrlBtn = el('loadUrlBtn');
+
+    if(loadFileBtn){
+      loadFileBtn.addEventListener('click', () => fileInput && fileInput.click());
+    }
+    if(fileInput){
+      fileInput.addEventListener('change', () => {
+        const f = fileInput.files[0]; if(!f) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          const ext = (f.name.split('.').pop()||'').toLowerCase();
+          const hint = ['json','csv'].includes(ext) ? ext : undefined;
+          loadDeckFromText(String(reader.result||''), hint);
+        };
+        reader.readAsText(f);
+        fileInput.value = '';
+      });
+    }
+
+    if(loadUrlBtn){
+      loadUrlBtn.addEventListener('click', async () => {
+        const url = prompt('Enter the URL of your deck file (JSON, CSV, or text):');
+        if(!url) return;
+        try{
+          const res = await fetch(url, {cache:'no-store'});
+          if(!res.ok) throw new Error(res.status+' '+res.statusText);
+          const text = await res.text();
+          const m = url.toLowerCase().match(/\.([a-z0-9]+)(?:\?|#|$)/);
+          const hint = m ? m[1] : undefined;
+          loadDeckFromText(text, hint);
+        }catch(err){
+          alert('Fetch failed: '+err+'\nIf loading a local file over file://, start a local server (e.g. `python -m http.server`) and try http://localhost/. Also ensure the remote server allows CORS.');
+        }
+      });
+    }
 
     // First render
     rebuildOrder();
