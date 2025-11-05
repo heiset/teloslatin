@@ -82,13 +82,6 @@ Quid agis? — How are you?"></textarea>
             <button class="btn success" id="importBtn">Import</button>
             <button class="btn secondary" id="exportBtn" title="Copy current deck as text">Export</button>
           </div>
-
-          <div class="row" style="margin-top:8px">
-            <button class="btn secondary" id="loadFileBtn" title="Load a local file of cards">Load file…</button>
-            <button class="btn secondary" id="loadUrlBtn" title="Fetch cards from a URL">Load from URL…</button>
-            <input type="file" id="fileInput" accept=".json,.csv,.txt" style="display:none" />
-          </div>
-          <p class="small muted">Accepted: <b>JSON</b> (array of {q,a}), <b>CSV</b> (header <code>q,a</code>), or plain text like <code>prompt = translation</code>.</p>
         </div>
       </details>
 
@@ -110,9 +103,9 @@ Quid agis? — How are you?"></textarea>
 
     // ---- Random deck sources (edit these to your filenames)
     const DECK_URLS = [
-      'decks/set-animals.txt',
-      'decks/set-body.txt',
-      'decks/set-commands.txt'
+      'decks/b1.txt',
+      'decks/b2.txt',
+      'decks/b3.txt'
     ];
 
     // ---------------------------
@@ -175,19 +168,17 @@ Quid agis? — How are you?"></textarea>
     function next(){
       if(deck.length===0) return;
       if(!showingA){
-        // reveal translation
         showingA = true;
       } else {
-        // advance to next card
         if(idx < order.length - 1){
           idx++;
           showingA = false;
         } else if(loopChk.checked){
           rebuildOrder();
-          return; // render was called in rebuildOrder
+          return;
         } else {
-          showingA = true; // stay on last answer
-          nextBtn.disabled = true; // end
+          showingA = true;
+          nextBtn.disabled = true;
         }
       }
       render();
@@ -196,7 +187,6 @@ Quid agis? — How are you?"></textarea>
     function prev(){
       if(deck.length===0) return;
       if(showingA){
-        // go back to prompt of same card
         showingA = false;
       } else if(idx>0){
         idx--; showingA = false;
@@ -204,7 +194,6 @@ Quid agis? — How are you?"></textarea>
       render();
     }
 
-    // Wire UI
     nextBtn.addEventListener('click', next);
     prevBtn.addEventListener('click', prev);
 
@@ -216,14 +205,12 @@ Quid agis? — How are you?"></textarea>
       localStorage.setItem('tinyfc_loop', loopChk.checked ? '1':'0');
     });
 
-    // Keyboard controls
     window.addEventListener('keydown', (e) => {
       if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
       if(e.code === 'Space' || e.key === 'ArrowRight'){ e.preventDefault(); next(); }
       if(e.key === 'ArrowLeft'){ e.preventDefault(); prev(); }
     });
 
-    // Import / Export helpers (paste box)
     const bulkInput = el('bulkInput');
     el('importBtn').addEventListener('click', () => {
       const lines = bulkInput.value.split(/\n+/).map(s=>s.trim()).filter(Boolean);
@@ -257,7 +244,6 @@ Quid agis? — How are you?"></textarea>
       }
     });
 
-    // -------- Parsers for external sources --------
     function parseLinesToDeck(text){
       const lines = text.split(/\n+/).map(s=>s.trim()).filter(Boolean);
       const out = [];
@@ -271,84 +257,7 @@ Quid agis? — How are you?"></textarea>
       }
       return out;
     }
-    function parseCSVToDeck(text){
-      const rows = text.split(/\r?\n/).filter(Boolean);
-      if(!rows.length) return [];
-      const splitCSV = (line)=> line.split(',').map(s=>s.replace(/^"|"$/g,'').trim());
-      const header = splitCSV(rows[0]).map(h=>h.toLowerCase());
-      const qi = header.indexOf('q'); const ai = header.indexOf('a');
-      if(qi===-1 || ai===-1) return [];
-      const out = [];
-      for(let i=1;i<rows.length;i++){
-        const cols = splitCSV(rows[i]);
-        const q = cols[qi]; const a = cols[ai];
-        if(q && a) out.push({q,a});
-      }
-      return out;
-    }
-    function parseJSONToDeck(text){
-      try{
-        const data = JSON.parse(text);
-        if(Array.isArray(data)) return data
-          .map(x=>({q: x.q || x.front || x.prompt, a: x.a || x.back || x.answer}))
-          .filter(x=>x.q && x.a);
-      }catch{}
-      return [];
-    }
-    function loadDeckFromText(text, hint){
-      let parsed = [];
-      if(hint==='json') parsed = parseJSONToDeck(text);
-      if(!parsed.length && hint==='csv') parsed = parseCSVToDeck(text);
-      if(!parsed.length) parsed = parseJSONToDeck(text);
-      if(!parsed.length) parsed = parseCSVToDeck(text);
-      if(!parsed.length) parsed = parseLinesToDeck(text);
-      return parsed;
-    }
 
-    // -------- File/URL loading --------
-    const fileInput = el('fileInput');
-    const loadFileBtn = el('loadFileBtn');
-    const loadUrlBtn = el('loadUrlBtn');
-
-    if(loadFileBtn){
-      loadFileBtn.addEventListener('click', () => fileInput && fileInput.click());
-    }
-    if(fileInput){
-      fileInput.addEventListener('change', () => {
-        const f = fileInput.files[0]; if(!f) return;
-        const reader = new FileReader();
-        reader.onload = () => {
-          const ext = (f.name.split('.').pop()||'').toLowerCase();
-          const hint = ['json','csv'].includes(ext) ? ext : undefined;
-          const parsed = loadDeckFromText(String(reader.result||''), hint);
-          if(parsed.length){ deck = parsed; rebuildOrder(); }
-          else alert('Could not parse any cards from file.');
-        };
-        reader.readAsText(f);
-        fileInput.value = '';
-      });
-    }
-
-    if(loadUrlBtn){
-      loadUrlBtn.addEventListener('click', async () => {
-        const url = prompt('Enter the URL of your deck file (JSON, CSV, or text):');
-        if(!url) return;
-        try{
-          const res = await fetch(url, {cache:'no-store'});
-          if(!res.ok) throw new Error(res.status+' '+res.statusText);
-          const text = await res.text();
-          const m = url.toLowerCase().match(/\.([a-z0-9]+)(?:\?|#|$)/);
-          const hint = m ? m[1] : undefined;
-          const parsed = loadDeckFromText(text, hint);
-          if(parsed.length){ deck = parsed; rebuildOrder(); }
-          else alert('Could not parse any cards from URL.');
-        }catch(err){
-          alert('Fetch failed: '+err+'\nIf loading a local file over file://, start a local server (e.g. `python -m http.server`) and try http://localhost/. Also ensure the remote server allows CORS.');
-        }
-      });
-    }
-
-    // Random deck on page load; fallback to built-in deck
     async function loadRandomDeckFromUrls(){
       if(!Array.isArray(DECK_URLS) || !DECK_URLS.length) return false;
       const pick = DECK_URLS[Math.floor(Math.random()*DECK_URLS.length)];
@@ -356,18 +265,14 @@ Quid agis? — How are you?"></textarea>
         const res = await fetch(pick, {cache:'no-store'});
         if(!res.ok) throw new Error(res.status+' '+res.statusText);
         const text = await res.text();
-        const m = pick.toLowerCase().match(/\.([a-z0-9]+)(?:\?|#|$)/);
-        const hint = m ? m[1] : undefined;
-        const parsed = loadDeckFromText(text, hint);
-        if(parsed.length){ deck = parsed; rebuildOrder(); return true; }
+        const parsed = parseLinesToDeck(text);
+        if(parsed.length){ deck = parsed; return true; }
       }catch(e){ console.warn('Random deck load failed:', e); }
       return false;
     }
 
-    // First render + try random deck
-    rebuildOrder();
-    loadRandomDeckFromUrls();
-
+    loadRandomDeckFromUrls().then(()=>{ rebuildOrder(); });
   </script>
 </body>
 </html>
+
