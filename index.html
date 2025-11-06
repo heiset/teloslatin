@@ -5,123 +5,115 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tiny Flashcards</title>
   <style>
-    :root{--bg:#0f172a;--card:#111827;--ink:#e5e7eb;--muted:#9ca3af;--accent:#22c55e;--accent2:#38bdf8}
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";color:var(--ink);background:linear-gradient(180deg,#0b1226,#0f172a)}
-    .wrap{min-height:100%;display:grid;place-items:center;padding:24px}
-    .app{width:min(900px,100%);display:grid;gap:16px}
-    .card{background:var(--card);border:1px solid #1f2937;border-radius:18px;padding:24px 24px 18px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    .prompt{font-size:clamp(20px,2.6vw,28px);letter-spacing:.2px}
-    .translation{opacity:.9}
-    .muted{color:var(--muted)}
-    .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-    .row.space{justify-content:space-between}
-    button{border:0;border-radius:14px;padding:12px 16px;font-weight:600;cursor:pointer;transition:transform .06s ease,opacity .2s ease,box-shadow .2s ease}
-    button:active{transform:translateY(1px)}
-    .btn{background:#0ea5e9;color:white}
-    .btn.secondary{background:#334155}
-    .btn.success{background:#22c55e}
-    .btn:disabled{opacity:.6;cursor:not-allowed}
-    .chip{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:#0b1226;border:1px solid #1f2937}
-    input[type="checkbox"]{inline-size:1.15rem;block-size:1.15rem}
-    progress{width:180px;height:10px;border-radius:99px;overflow:hidden;background:#0b1226;border:1px solid #1f2937}
-    progress::-webkit-progress-bar{background:#0b1226}
-    progress::-webkit-progress-value{background:linear-gradient(90deg,var(--accent),var(--accent2))}
-    progress::-moz-progress-bar{background:linear-gradient(90deg,var(--accent),var(--accent2))}
-    .small{font-size:12px}
-    .footer{opacity:.7;text-align:center;margin-top:8px}
-    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0b1226;border:1px solid #1f2937;border-bottom-width:2px;padding:2px 6px;border-radius:6px}
-    details{background:#0b1226;border:1px dashed #374151;border-radius:14px;padding:8px 12px}
-    textarea{width:100%;min-height:140px;background:#0b1226;border:1px solid #1f2937;border-radius:12px;color:var(--ink);padding:12px;font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace}
-    .import-grid{display:grid;gap:10px}
-    @media (max-width:520px){
-      .row.stack{flex-direction:column;align-items:stretch}
-      progress{width:100%}
+    :root { --bg:#000; --fg:#fff; --muted:#9a9a9a; }
+    *{ box-sizing:border-box }
+    html,body{ height:100%; margin:0 }
+
+    /* Fixed background image via ::before pseudo-element */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      background: url('bg.jpg') center/cover no-repeat;
+      z-index: -2;
     }
+
+    body{
+      font-family:"Times New Roman", Georgia, serif;
+      color:var(--fg);
+      background: var(--bg);
+      display:block;
+      min-height:100vh;
+    }
+
+    .app{ width:min(860px,94%); margin:14vh auto 24vh; display:grid; gap:28px }
+
+.card{
+  border: 3px solid var(--fg);
+  border-radius: 40px;
+  /* make the actual card transparent… */
+  background: transparent;
+  /* …and draw the black panel inside with ::before */
+  position: relative;
+  padding: 64px 44px 36px;
+  text-align: center;
+}
+
+/* inner black panel, inset from the white border */
+.card::before{
+  content: "";
+  position: absolute;
+  inset: 2px;                        /* tweak this to change how much black you see */
+  background: rgba(0,0,0,0.8);
+  border-radius: calc(40px - 12px);   /* keep corners nicely rounded */
+  z-index: 0;
+}
+
+/* ensure your content sits above the inner panel */
+.card > * { position: relative; z-index: 1; }
+
+
+    #stage{ min-height:clamp(220px,40vh,420px); display:grid; place-items:center; gap:14px }
+
+    .prompt{ font-size:clamp(34px,3.8vw,50px); letter-spacing:.3px; margin:0 }
+    .translation{ display:block; min-height:2.6em; font-size:clamp(26px,2.9vw,38px); color:var(--muted); transition:opacity .15s ease }
+    .translation.hidden{ visibility:hidden; opacity:0 }
+    .translation.visible{ visibility:visible; opacity:.95 }
+
+    .row{ display:flex; justify-content:center; gap:18px; margin-top:28px }
+    button{ font:18px/1.2 inherit; color:var(--fg); background:transparent; border:2px solid var(--fg); border-radius:50px; padding:12px 30px; cursor:pointer; transition:all .15s ease }
+    button:hover{ background:var(--fg); color:var(--bg) }
+    button:disabled{ opacity:.35; cursor:not-allowed }
+
+    .footer{ text-align:center; opacity:.6; font-size:14px; letter-spacing:.6px }
+    .footer-title{ font-family: 'Arial', 'Helvetica', sans-serif; font-weight: bold; color: #39ff14; font-size: 13px; letter-spacing: 1.2px; text-transform: uppercase; }
+    .shuffle-btn{ display:flex; justify-content:center; margin-bottom:16px }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <main class="app" id="app">
-
-      <div class="card">
-        <div class="row space">
-          <div class="row" role="group" aria-label="Controls">
-            <button class="btn secondary" id="prevBtn" title="Previous (←)">⟵ Prev</button>
-            <button class="btn" id="nextBtn" title="Next / Reveal (Space or →)">Next ⟶</button>
-          </div>
-          <div class="row">
-            <label class="chip"><input type="checkbox" id="shuffleChk"> <span>Shuffle</span></label>
-            <label class="chip"><input type="checkbox" id="loopChk" checked> <span>Loop</span></label>
-          </div>
-        </div>
-
-        <div id="stage" style="margin:14px 0 10px">
-          <div class="prompt" id="lineText" aria-live="polite"></div>
-          <div class="translation muted" id="lineTrans" style="display:none;margin-top:8px"></div>
-        </div>
-
-        <div class="row space stack" style="margin-top:6px">
-          <div class="row" style="gap:14px">
-            <span class="chip" id="posChip">Card <span id="pos">1</span>/<span id="total">1</span></span>
-            <progress id="prog" value="0" max="100" aria-label="Progress"></progress>
-          </div>
-          <div class="small muted">Tip: press <span class="kbd">Space</span> or <span class="kbd">→</span> for Next, <span class="kbd">←</span> for Prev.</div>
-        </div>
+  <main class="app" id="app">
+    <div class="shuffle-btn">
+      <button id="shuffleBtn">🔀 Shuffle</button>
+    </div>
+    <div class="card">
+      <div id="stage">
+        <div class="prompt" id="lineText" aria-live="polite"></div>
+        <div class="translation hidden" id="lineTrans" style="margin-top:16px"></div>
       </div>
-
-      <details>
-        <summary>📥 Quick import (paste list → build cards)</summary>
-        <div class="import-grid">
-          <p class="muted small">Paste lines as <code>prompt = translation</code> (or use <code>—</code>, <code>-</code>, <code>:</code>). One pair per line.</p>
-          <textarea id="bulkInput" placeholder="Salvē! = Hello!
-Nōlī timēre. = Do not be afraid.
-Quid agis? — How are you?"></textarea>
-          <div class="row">
-            <button class="btn success" id="importBtn">Import</button>
-            <button class="btn secondary" id="exportBtn" title="Copy current deck as text">Export</button>
-          </div>
-        </div>
-      </details>
-
-      <div class="footer small">Mr. Heise's flashcards for Telos · "Cada maestrillo cada librillo" </div>
-    </main>
-  </div>
+      <div class="row" id="controlsBottom">
+        <button id="prevBtn">⟵ Prev</button>
+        <button id="nextBtn">Next ⟶</button>
+      </div>
+    </div>
+    <div class="footer">
+      <span class="footer-title">Mr. Heise's Latin Flashcards</span><br>
+      <span style="opacity:0.7; font-size:12px; margin-top:8px; display:inline-block;">
+        Keyboard: Space or → for Next · ← for Previous
+      </span>
+    </div>
+  </main>
 
   <script>
-    // ---------------------------
-    // 1) Your data lives here 👇
     let deck = [
       { q: "Ī ad popīnam pedibus.", a: "Go to the restaurant on foot." },
       { q: "Ī ad librāriam bīrotā.", a: "Go to the bookstore by bike." },
       { q: "Dic 'sōl est.'", a: "Say 'it is the sun.'" },
       { q: "Quot gladīī sunt?", a: "How many swords are there?" },
-      { q: "Unus gladius est.", a: "There is one sword." },
+      { q: "Unus gladius est.", a: "There is one sword." }
     ];
 
-    // ---- Random deck sources: auto-generate b1–b20
     const DECK_URLS = Array.from({length: 20}, (_, i) => `decks/b${i+1}.txt`);
 
-    // ---------------------------
-    // 2) App state
     const el = (id) => document.getElementById(id);
     const lineText = el('lineText');
     const lineTrans = el('lineTrans');
     const nextBtn = el('nextBtn');
     const prevBtn = el('prevBtn');
-    const shuffleChk = el('shuffleChk');
-    const loopChk = el('loopChk');
-    const pos = el('pos');
-    const total = el('total');
-    const prog = el('prog');
+    const shuffleBtn = el('shuffleBtn');
 
     let order = deck.map((_, i) => i);
     let idx = 0;
     let showingA = false;
-
-    shuffleChk.checked = localStorage.getItem('tinyfc_shuffle') === '1';
-    loopChk.checked    = localStorage.getItem('tinyfc_loop')    !== '0';
 
     function shuffleArray(arr){
       for(let i=arr.length-1;i>0;i--){
@@ -131,32 +123,33 @@ Quid agis? — How are you?"></textarea>
       return arr;
     }
 
+    function shuffleDeck(){
+      order = shuffleArray(deck.map((_, i) => i));
+      idx = 0;
+      showingA = false;
+      render();
+    }
+
     function rebuildOrder(){
       order = deck.map((_, i) => i);
-      if(shuffleChk.checked) shuffleArray(order);
       idx = 0;
       showingA = false;
       render();
     }
 
     function render(){
-      total.textContent = deck.length;
       const current = deck[ order[idx] ];
       if(!current){
         lineText.textContent = "(No cards)";
-        lineTrans.style.display = 'none';
+        lineTrans.classList.add('hidden');
         nextBtn.disabled = true; prevBtn.disabled = true;
-        pos.textContent = '0'; prog.value = 0; return;
+        return;
       }
       nextBtn.disabled = false; prevBtn.disabled = false;
-
       lineText.textContent = current.q;
       lineTrans.textContent = current.a;
-      lineTrans.style.display = showingA ? 'block' : 'none';
-      pos.textContent = String(idx+1);
-      const pct = Math.round(((idx) / Math.max(deck.length,1)) * 100);
-      prog.value = pct;
-      document.title = (showingA?"A: ":"Q: ") + current.q.replace(/<[^>]*>/g,'');
+      lineTrans.classList.toggle('visible', showingA);
+      lineTrans.classList.toggle('hidden', !showingA);
     }
 
     function next(){
@@ -167,12 +160,9 @@ Quid agis? — How are you?"></textarea>
         if(idx < order.length - 1){
           idx++;
           showingA = false;
-        } else if(loopChk.checked){
-          rebuildOrder();
-          return;
         } else {
-          showingA = true;
-          nextBtn.disabled = true;
+          idx = 0;
+          showingA = false;
         }
       }
       render();
@@ -190,52 +180,11 @@ Quid agis? — How are you?"></textarea>
 
     nextBtn.addEventListener('click', next);
     prevBtn.addEventListener('click', prev);
-
-    shuffleChk.addEventListener('change', () => {
-      localStorage.setItem('tinyfc_shuffle', shuffleChk.checked ? '1':'0');
-      rebuildOrder();
-    });
-    loopChk.addEventListener('change', () => {
-      localStorage.setItem('tinyfc_loop', loopChk.checked ? '1':'0');
-    });
+    shuffleBtn.addEventListener('click', shuffleDeck);
 
     window.addEventListener('keydown', (e) => {
-      if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
       if(e.code === 'Space' || e.key === 'ArrowRight'){ e.preventDefault(); next(); }
       if(e.key === 'ArrowLeft'){ e.preventDefault(); prev(); }
-    });
-
-    const bulkInput = el('bulkInput');
-    el('importBtn').addEventListener('click', () => {
-      const lines = bulkInput.value.split(/\n+/).map(s=>s.trim()).filter(Boolean);
-      const parsed = [];
-      for(const line of lines){
-        const parts = line.split(/\s*(?:=|—|-|:)\s*/);
-        if(parts.length>=2){
-          const q = parts[0].trim();
-          const a = parts.slice(1).join(' - ').trim();
-          if(q && a) parsed.push({q,a});
-        }
-      }
-      if(parsed.length){
-        deck = parsed; rebuildOrder();
-      } else {
-        alert('Could not find any “prompt = translation” lines to import.');
-      }
-    });
-
-    el('exportBtn').addEventListener('click', async () => {
-      const text = deck.map(d=>`${d.q} = ${d.a}`).join('\n');
-      try{
-        await navigator.clipboard.writeText(text);
-        alert('Deck copied to clipboard!');
-      }catch{
-        const blob = new Blob([text], {type:'text/plain'});
-        const a=document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'flashcards.txt';
-        document.body.appendChild(a); a.click(); a.remove();
-      }
     });
 
     function parseLinesToDeck(text){
