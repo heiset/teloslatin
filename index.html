@@ -65,15 +65,20 @@
     button:hover{ background:var(--fg); color:var(--bg) }
     button:disabled{ opacity:.35; cursor:not-allowed }
 
-    .footer{ text-align:center; opacity:.6; font-size:14px; letter-spacing:.6px }
+    .footer{ text-align:center; font-size:14px; letter-spacing:.6px; background: rgba(0,0,0,0.6); padding: 16px 24px; border-radius: 12px; display: inline-block; }
     .footer-title{ font-family: 'Arial', 'Helvetica', sans-serif; font-weight: bold; color: #39ff14; font-size: 13px; letter-spacing: 1.2px; text-transform: uppercase; }
-    .shuffle-btn{ display:flex; justify-content:center; margin-bottom:16px }
+    .shuffle-btn{ display:flex; justify-content:center; margin-bottom:16px; flex-direction: column; align-items: center; gap: 12px; }
+    .card-counter{ font-family: 'Arial', 'Helvetica', sans-serif; font-weight: bold; color: #39ff14; font-size: 14px; background: rgba(0,0,0,0.6); padding: 8px 20px; border-radius: 12px; }
+    .toplink{ position: fixed; top: 12px; right: 12px; color: var(--fg); text-decoration: none; border: 2px solid var(--fg); border-radius: 999px; padding: 6px 16px; font-size: 14px; background: rgba(0,0,0,0.6); transition: all 0.15s ease; z-index: 100; }
+    .toplink:hover{ background: var(--fg); color: var(--bg); }
   </style>
 </head>
 <body>
+  <a class="toplink" href="decks.html">📚 Decks</a>
   <main class="app" id="app">
     <div class="shuffle-btn">
       <button id="shuffleBtn">🔀 Shuffle</button>
+      <div class="card-counter" id="cardCounter">1/5</div>
     </div>
     <div class="card">
       <div id="stage">
@@ -85,11 +90,13 @@
         <button id="nextBtn">Next ⟶</button>
       </div>
     </div>
-    <div class="footer">
-      <span class="footer-title">Mr. Heise's Latin Flashcards</span><br>
-      <span style="opacity:0.7; font-size:12px; margin-top:8px; display:inline-block;">
-        Keyboard: Space or → for Next · ← for Previous
-      </span>
+    <div style="text-align:center;">
+      <div class="footer">
+        <span class="footer-title">Mr. Heise's Latin Flashcards</span><br>
+        <span style="opacity:0.7; font-size:12px; margin-top:8px; display:inline-block;">
+          Keyboard: Space or → for Next · ← for Previous
+        </span>
+      </div>
     </div>
   </main>
 
@@ -110,6 +117,7 @@
     const nextBtn = el('nextBtn');
     const prevBtn = el('prevBtn');
     const shuffleBtn = el('shuffleBtn');
+    const cardCounter = el('cardCounter');
 
     let order = deck.map((_, i) => i);
     let idx = 0;
@@ -143,6 +151,7 @@
         lineText.textContent = "(No cards)";
         lineTrans.classList.add('hidden');
         nextBtn.disabled = true; prevBtn.disabled = true;
+        cardCounter.textContent = "0/0";
         return;
       }
       nextBtn.disabled = false; prevBtn.disabled = false;
@@ -150,6 +159,7 @@
       lineTrans.textContent = current.a;
       lineTrans.classList.toggle('visible', showingA);
       lineTrans.classList.toggle('hidden', !showingA);
+      cardCounter.textContent = `${idx + 1}/${deck.length}`;
     }
 
     function next(){
@@ -202,6 +212,24 @@
     }
 
     async function loadRandomDeckFromUrls(){
+      // Check if a specific deck is requested via URL parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const deckNum = urlParams.get('deck');
+      
+      if (deckNum) {
+        // Load specific deck
+        const deckUrl = `decks/b${deckNum}.txt`;
+        try{
+          const res = await fetch(deckUrl, {cache:'no-store'});
+          if(!res.ok) throw new Error(res.status+' '+res.statusText);
+          const text = await res.text();
+          const parsed = parseLinesToDeck(text);
+          if(parsed.length){ deck = parsed; return true; }
+        }catch(e){ console.warn('Deck load failed:', e); }
+        return false;
+      }
+      
+      // Otherwise load random deck
       if(!Array.isArray(DECK_URLS) || !DECK_URLS.length) return false;
       const pick = DECK_URLS[Math.floor(Math.random()*DECK_URLS.length)];
       try{
