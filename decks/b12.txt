@@ -1,0 +1,17 @@
+Mē vocant (My name is) = "Let the wise man bear the name of a madman if he seek wisdom more than is sufficient." —Horace
+
+What is your name (lit How do they call you) = Quōmodo tē vocant
+They call me ___ = Mē vocant ___
+By what name are you called = Quō nōmine appellāris
+I am called Julius = Iūlius appellor
+First name = Praenōmen
+Family name = Nōmen
+Nickname / Surname = Cognōmen
+Titus Maccius Plautus (the cognomen means flat-footed) = Titus Maccius Plautus (cognōmen significat plantipedem)
+What country do you have = Quam patriam habēs
+I am Syracusan = Syrācūsānus sum
+Of what country are you = Cuiās es
+Of what country are you all = Cuiātēs estis
+Where are you born (m/f) = Unde es ortus / orta
+Where are you all born (m/f) = Unde estis ortī / ortae
+I was born from North America = Ortus / orta sum ex Americā Septentriōnālī

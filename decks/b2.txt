@@ -1,0 +1,24 @@
+Rēs conclāvis scholāris (Classroom things) = "Ere the student congeal, tirelessly we must shape him on the potter's wheel." —Persius
+
+Pencil = Graphis
+Pen = Calamus
+Board = Tabula
+Chalk = Crēta
+Book = Liber
+Notebook = Libellus / Pugillārēs
+Folder = Integumentum
+Packet = Fasciculus
+Binder = Fasciculus Astrictōrius
+Wall = Pariēs
+Door = Iānua
+Window = Fenestra
+Flag = Vexillum
+Desk = Mēnsa
+Chair = Sella
+Bookshelf = Pēgma
+Floor = Solum
+Lamp = Lūcerna
+Eraser = Cummi
+Sharpener = Acūminārium
+Backpack = Bulga / Saccus
+Pencil case = Capsula

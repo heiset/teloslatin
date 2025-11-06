@@ -1,0 +1,10 @@
+Quī sumus? (Who are we?) = "I am a philosopher." —Pythagoras
+
+Who are we? = Quī sumus?
+We are John and Susanna = Nōs Iōannēs et Susanna sumus.
+Who are you (plural)? = Quī estis?
+Are you John and Susanna? = Vōs Iōannēs et Susanna estis?
+Who are they (feminine)? = Quae sunt?
+They are men = Illī sunt virī.
+They are women = Illae sunt fēminae.
+They are men and women = Illī sunt virī et fēminae.

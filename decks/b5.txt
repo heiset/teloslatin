@@ -1,0 +1,8 @@
+Unde oriundus? (Where are you from?) = "He who dwells everywhere, Maximus, dwells nowhere." —Martial
+
+Where do you live? = Ubi habitās?
+I live in a town = In oppidō habitō.
+Where are you (all) from? = Unde oriundus (m.) / oriunda (f.) es? / estis?
+I’m from... = Oriundus (m.) / oriunda (f.) sum ex...
+Where were you born? = Ubi nātus (m.) / nāta (f.) es?
+I was born in... = Nātus (m.) / nāta (f.) sum in...

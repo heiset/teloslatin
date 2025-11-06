@@ -1,0 +1,30 @@
+Partēs corporis (Body parts) = "If his legs fail him, he fights on his knees." —Seneca, De Providentia, c. 2.
+
+Stretch or contract your fingers arm head = Extendē contrahē digitōs bracchium caput
+Lift your leg left hand shoulder = Tolle crus manum sinistram humerum
+Lower your leg right hand shoulder = Dēmitte crus manum dextram humerum
+Touch your hand nose teeth head = Tangē manum nāsum dentēs caput
+
+Head = Caput
+Eye = Oculus
+Ear = Auris
+Mouth = Ōs
+Shoulder = Humerus
+Chest = Pectus
+Leg = Crus
+Knee = Genu
+Hair = Capillī
+Nose = Nāsus
+Finger = Digitus
+Hand = Manus
+Arm = Bracchium
+Elbow = Cubitus
+Foot = Pēs
+
+Open your mouth = Aperī ōs
+Speak = Loquere
+Shout = Clāmā
+Speak in English in French in Greek = Loquere Anglicē Gallicē Graecē
+Sing = Canē
+Whistle = Sībilā
+Bark = Lātrā

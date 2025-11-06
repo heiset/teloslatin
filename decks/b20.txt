@@ -1,0 +1,21 @@
+Quōmodo tē habēs (How do you feel?) = "He designed not to throw down Orodes as he fled, but to give him a wound unseen...” —Aeneid, x. 732.
+
+How are you = Quōmodo tē habēs
+
+I am well = Bene mē habeō
+I am very well = Optimē mē habeō
+I am so so = Satis bene mē habeō
+I am not bad = Nōn male mē habeō
+I am bad = Male mē habeō
+I am very bad = Pessimē mē habeō
+I am tired = Fessus sum
+I am hungry = Ēsuriō
+I am thirsty = Sitiō
+I am sick = Aegrotō
+I am happy = Laetus sum
+I am sad = Trīstis sum
+I am angry = Īrātus sum
+I am afraid = Timeō
+I am cold = Algeō
+I am hot = Aestuō
+Maybe well maybe not = Fortasse bene fortasse nōn

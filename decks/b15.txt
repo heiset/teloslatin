@@ -1,0 +1,26 @@
+Quot? (How many?) = "How many condemnations have I seen more criminal than the crimes themselves?" —Cicero
+
+How many pens are there = Quot calāmī sunt
+One = Ūnus
+
+How many bags are there = Quot bulgae sunt
+One = Ūna
+
+How many gifts are there = Quot dōna sunt
+One = Ūnum
+
+One = Ūnus -a -um
+Two = Duo duae duo
+Three = Trēs tria
+Four = Quattuor
+Five = Quīnque
+Six = Sex
+Seven = Septem
+Eight = Octō
+Nine = Novem
+Ten = Decem
+
+How many pens and bags and gifts are there = Quot calāmī et bulgae et dōna sunt
+Two pens and two bags and two gifts = Duo calāmī et duae bulgae et duo dōna
+Or three pens three bags and three gifts = Aut trēs calāmī trēs bulgae et tria dōna
+Or four five these are invariant = Aut quattuor quīnque hī sunt invariante

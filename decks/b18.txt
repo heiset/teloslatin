@@ -1,0 +1,11 @@
+Tempestās (Weather) = “And to protect from the weather nearly all things are clothed with skin, or hair, or shells, or bark, or some such thing.” —Lucretius, iv. 936.
+
+It is raining = Pluit
+The sun shines brightly = Sōl valdē splendet
+It is cold = Frīgora sunt
+I am cold = Algeō
+It is hot = Calōrēs sunt
+I am hot = Aestuō
+The wind is blowing = Flat ventus
+The sun is shining = Sōl splendet
+I am well = Bene valeō
