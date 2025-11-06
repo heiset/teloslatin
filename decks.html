@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deck Selector - Latin Flashcards</title>
+  <style>
+    :root { --bg:#000; --fg:#fff; }
+    *{ box-sizing:border-box }
+    html,body{ height:100%; margin:0 }
+
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      background: url('bg.jpg') center/cover no-repeat;
+      z-index: -2;
+    }
+
+    body{
+      font-family:"Times New Roman", Georgia, serif;
+      color:var(--fg);
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      min-height:100vh;
+    }
+
+    .container{ 
+      background: rgba(0,0,0,0.6);
+      padding: 32px 40px;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1{ 
+      text-align: center;
+      font-size: 28px;
+      margin: 0 0 24px 0;
+      letter-spacing: 1px;
+    }
+
+    .deck-list{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .deck-list a{
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 18px;
+      padding: 8px 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .deck-list a:hover{
+      opacity: 0.7;
+    }
+
+    .loading{
+      text-align: center;
+      font-size: 16px;
+      opacity: 0.7;
+    }
+
+    .back-link{
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      color: var(--fg);
+      text-decoration: none;
+      border: 2px solid var(--fg);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 14px;
+      background: rgba(0,0,0,0.6);
+      transition: all 0.15s ease;
+      z-index: 100;
+    }
+
+    .back-link:hover{
+      background: var(--fg);
+      color: var(--bg);
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="index.html">← Back</a>
+  
+  <div class="container">
+    <h1>Select a Deck</h1>
+    <div id="deckList" class="deck-list">
+      <div class="loading">Loading decks...</div>
+    </div>
+  </div>
+
+  <script>
+    const DECK_COUNT = 20;
+    const deckList = document.getElementById('deckList');
+
+    async function loadDeckFirstLine(deckNum) {
+      try {
+        const res = await fetch(`decks/b${deckNum}.txt`, {cache:'no-store'});
+        if (!res.ok) throw new Error('Failed to load');
+        const text = await res.text();
+        const firstLine = text.split('\n')[0].trim();
+        return firstLine || `Deck ${deckNum}`;
+      } catch(e) {
+        return `Deck ${deckNum}`;
+      }
+    }
+
+    async function loadAllDecks() {
+      deckList.innerHTML = '';
+      
+      for (let i = 1; i <= DECK_COUNT; i++) {
+        const firstLine = await loadDeckFirstLine(i);
+        
+        const link = document.createElement('a');
+        link.href = `index.html?deck=${i}`;
+        link.textContent = firstLine;
+        
+        deckList.appendChild(link);
+      }
+    }
+
+    loadAllDecks();
+  </script>
+</body>
+</html>
