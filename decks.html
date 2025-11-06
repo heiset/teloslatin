@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Deck Selector</title>
+  <title>Deck Selector - Latin Flashcards</title>
   <style>
     :root { --bg:#000; --fg:#fff; }
     *{ box-sizing:border-box }
@@ -91,7 +91,7 @@
   <a class="back-link" href="index.html">← Back</a>
   
   <div class="container">
-    <h1>Dēlige tabulam</h1>
+    <h1>Select a Deck</h1>
     <div id="deckList" class="deck-list">
       <div class="loading">Loading decks...</div>
     </div>
@@ -106,7 +106,7 @@
         const res = await fetch(`decks/b${deckNum}.txt`, {cache:'no-store'});
         if (!res.ok) throw new Error('Failed to load');
         const text = await res.text();
-        const firstLine = text.split('\n')[0].trim();
+        const firstLine = text.split('=')[0].trim();
         return firstLine || `Deck ${deckNum}`;
       } catch(e) {
         return `Deck ${deckNum}`;
