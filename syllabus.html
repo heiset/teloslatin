@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Syllabus - Latin Flashcards</title>
+  <style>
+    :root { --bg:#000; --fg:#fff; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      background: url('bg.jpg') center/cover no-repeat;
+      z-index: -2;
+    }
+
+    body {
+      font-family:"Times New Roman", Georgia, serif;
+      color: var(--fg);
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      min-height: 100vh;
+    }
+
+    .container{ 
+      background: rgba(0,0,0,0.85);
+      padding: 40px 48px;
+      border-radius: 12px;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    h1{ 
+      text-align: center;
+      font-size: 32px;
+      margin: 0 0 32px 0;
+      letter-spacing: 1.5px;
+    }
+
+    .content {
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .content p {
+      margin-bottom: 16px;
+    }
+
+    .content ul {
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+
+    .content li {
+      margin-bottom: 8px;
+    }
+
+    .back-link{
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      color: var(--fg);
+      text-decoration: none;
+      border: 2px solid var(--fg);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 14px;
+      background: rgba(0,0,0,0.6);
+      transition: all 0.15s ease;
+      z-index: 100;
+    }
+
+    .back-link:hover{
+      background: var(--fg);
+      color: var(--bg);
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="index.html">← Back</a>
+  
+  <div class="container">
+    <h1>Syllabus</h1>
+    <div class="content">
+      <p>Welcome to Latin with Mr. Heise!</p>
+      
+      <p>Course objectives:</p>
+      <ul>
+        <li>Build foundational Latin vocabulary</li>
+        <li>Understand basic grammatical structures</li>
+        <li>Read and translate simple Latin texts</li>
+        <li>Appreciate Roman culture and history</li>
+      </ul>
+
+      <p>Practice regularly with the flashcard decks to reinforce your learning.</p>
+    </div>
+  </div>
+</body>
+</html>
