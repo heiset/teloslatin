@@ -1,12 +1,15 @@
 Monstrā mihi (Show me) = “Show me good medicine, and I will take it.” —Horace, xvii. I.
 
 Show me the pen = Monstrā mihi calamum
-Show / Touch / Take / Put (on the table) = Monstrā / Tangē / Cape / Pōne (in mēnsā)
-This book / pen = Hunc librum / calamum
-This cup / wine = Hoc poculum / vīnum
+Touch the pen = Tangē calamum
+Take the pen = Cape calamum
+Put the pen on the table = Pōne calamum in mēnsā
+This book / pen = Hunc librum/calamum
+This cup / wine = Hoc poculum/vīnum
 That chair / window / table = Illam sellam / fenestram / mēnsam
-Show the student to me (m/f) = Monstrā discipulum / discipulam
-Show the teacher to me (m/f) = Monstrā magistrum / magistram
-Show the woman and the man to me = Monstrā mulierem et hominem
-A wise and a foolish student = Prūdentem et stultum discipulum
-A difficult and an easy road = Difficilem et facilem viam
+Show the student to me = Monstrā discipulum/am (m/f)
+Show the teacher to me (m/f) = Monstrā magistrum/am (m/f)
+Show the man to me = Monstrā mihi hominem
+Show the woman to me = Monstrā mihi mulierem
+A wise and a foolish student = Monstrā mihi prūdentem et stultum discipulum
+A difficult and an easy road = Monstrā mihi difficilem et facilem viam
