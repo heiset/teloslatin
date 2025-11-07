@@ -1,18 +1,18 @@
 Umbram videō (I see a ghost) = “Let us pluck life’s sweets, ‘tis for them we live: by and by we shall be ashes, a ghost, a mere subject of talk.” —Persius, Sat., v. 151.
 
-Where are you walking = Ubi ambulās
+Where are you walking? = Ubi ambulās?
 I am walking in the street = In viā ambulō
-What do you see = Quid vidēs
+What do you see? = Quid vidēs?
 I see a shadow = Umbram videō
-What is happening to you or what is wrong = Quid tibi accidit
+What happens to you? = Quid tibi accidit?
 I am afraid = Timeō
-Where are you hiding = Ubi tē abscondis
+Where are you hiding? = Ubi tē abscondis?
 I hide behind the chest = Post arcam mē abscondō
-What are you eating = Quid edis
+What are you eating? = Quid edis?
 I am eating poison = Venēnum edō
-What is wrong with you = Quid tibi accidit
+What happens to you? = Quid tibi accidit?
 My stomach head or heart hurts = Venter caput cor dolet
-What are you taking = Quid sūmis
+What are you taking? = Quid sūmis?
 I am taking medicine = Medicīnam sūmō
-How are you feeling = Ut valēs
+How are you feeling? = Ut valēs?
 I feel better = Melius habeō
