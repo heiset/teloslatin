@@ -3,7 +3,7 @@ Ubi? (Where?) = "Where is the wise? Where is the scribe?" — 1 Corinthians 1:19
 Where are you, Philip? = Ubi es, Philippē
 I am here = Hīc sum
 Are you there, Rosa? = Esne illīc, Rōsa
-Yes, I am (here) = Ita, haec sum
+Yes, I am here = Ita, haec (f) sum
 
 Walk slowly = Lentē ambula
 Walk quickly = Celeriter ambula
@@ -12,7 +12,8 @@ Follow me = Sequere mē
 
 Turn = Verte
 Bend / Turn = Flecte
-To the left / right = Ad laevam / dextram
+To the left = Ad laevam
+To the right = Ad dextram
 Enter = Intrā
 It is not here but there = Nōn hīc est sed illīc
 From here / from there = Hinc / Illinc
