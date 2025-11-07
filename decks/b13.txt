@@ -1,16 +1,18 @@
 Edere (To eat) = “Democritus’ cattle eat his corn and spoil his fields, whilst his soaring mind ranges abroad without the body.” —Horace, Ep., i, 12, 12.
 
-What does the man / woman want to drink = Quid vir / mulier bibere vult
-What do you want to eat = Quid vīs edere
+What does the man want to drink? = Quid vir bibere vult?
+What does the woman want to drink? = Quid mulier bibere vult?
+What do you want to eat? = Quid vīs edere?
 I want to eat ___ = Volō edere ___
 I do not want to eat ___ = Nōlō edere ___
-What does he / she not want = Quid nōn vult
-Do you want to drink water = Vīsne bibere aquam
+What does he/she not want? = Quid nōn vult?
+Do you want to drink water? = Vīsne bibere aquam?
 
 I want water = Volō aquam
+I don't want water = Nōlō aquam
 You want bread = Vīs panem
-He / She wants milk = Vult lac
-We want a cookie = Volumus crustulum
+He/she wants milk = Vult lac
+We want a cookie! = Volumus crustulum!
 Y’all want fruit = Vultis fructum
 They want wine = Volunt vīnum
 
