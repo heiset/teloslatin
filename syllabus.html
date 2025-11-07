@@ -18,23 +18,28 @@
 
     body {
       font-family: "Times New Roman", Georgia, serif;
-      color: #39ff14; /* neon green from block 2 */
-      background: var(--bg);
+      color: #39ff14;
       display: grid;
       place-items: center;
       padding: 32px;
       min-height: 100vh;
+      background: var(--bg);
     }
 
     .container {
-      max-width: 700px;
-      width: 100%;
       text-align: center;
+    }
+
+    h1, .pdf-line {
+      display: inline-block;
+      background: #000; /* solid black background for readability */
+      padding: 8px 16px;
+      border-radius: 6px;
+      margin-bottom: 20px;
     }
 
     h1 {
       font-size: 32px;
-      margin-bottom: 32px;
       letter-spacing: 1.5px;
     }
 
@@ -75,9 +80,9 @@
 
   <div class="container">
     <h1>Syllabus</h1>
-    <p>
+    <div class="pdf-line">
       <a class="pdf-link" href="syllabus.pdf" target="_blank">Click here to view the syllabus (PDF)</a>
-    </p>
+    </div>
   </div>
 </body>
 </html>
