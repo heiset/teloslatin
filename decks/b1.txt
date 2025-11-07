@@ -3,13 +3,13 @@ Salvē (Hello!) = "A friend is a second self"—Cicero
 This is Alexander = Hic est Alexandēr
 This is Rosa = Haec est Rōsa
 
-Hello (sing./pl.) = Salvē. / Salvēte
-Goodbye (sing./pl.) = Valē. / Valēte
+Hello = Salvē / Salvēte (s/pl)
+Goodbye = Valē / Valēte (s/pl)
 
 What is your name? = Quid tibi nōmen est?
 My name is Rosa = Nōmen mihi Rōsa est
 
-How are you? = Ut valēs?  Ut valētis?
+How are you? = Ut valēs? Ut valētis? (pl)
 I am well = Valeō
 I am excellent = Optime valeō
 I am good = Bene valeō
@@ -20,24 +20,25 @@ I am bad = Male valeō
 I am very bad = Pessimē valeō
 
 I am Alexander = Ego sum Alexander
-Who? (m/f) = Quis? / Quae?
+Who? = Quis? / Quae? (m/f)
 
-Stand up = Surge
-Walk = Ambula
-Stop = Consiste
-Sit down = Consīde
-Run = Curre
-Go out = Exī
-Jump = Salī
+Stand up! = Surge!
+Walk! = Ambula!
+Stop! = Consiste!
+Sit down! = Consīde!
+Run! = Curre!
+Go out! = Exī!
+Jump! = Salī!
 
-Where are you?
-Where am I? = Ubi es / sum?
+Where am I? = Ubi sum?
+Where are you? = Ubi es?
+Where is he? = Ubi est?
 Here / There = Hīc / Illīc
-Is it Trevor? = Estne Trevor?
+Is this Julius? = Estne Julius?
 Yes / No = Ita / Nōn
 
-Either Trevor or Montaigne? = Utrum Trevor an Updike?
-Neither Trevor nor Montaigne = Neque Trevor neque Montaigne
+Either Julius or Montaigne? = Utrum Julius an Updike?
+Neither Julius nor Montaigne = Neque Julius neque Montaigne
 Come / Go / Return = Vēnī / Ī / Revertēre
 Come / Go / Return (plūrālis) = Vēnite / Īte / Revertīminī
 Go to the table = Ī ad mēnsam
