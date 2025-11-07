@@ -28,19 +28,23 @@
 
     .container {
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
     }
 
-    h1, .pdf-line {
+    .highlight-box {
       display: inline-block;
-      background: #000; /* solid black background for readability */
+      background: #000;
       padding: 8px 16px;
       border-radius: 6px;
-      margin-bottom: 20px;
     }
 
     h1 {
       font-size: 32px;
       letter-spacing: 1.5px;
+      margin: 0;
     }
 
     a.pdf-link {
@@ -79,8 +83,10 @@
   <a class="back-link" href="index.html">← Back</a>
 
   <div class="container">
-    <h1>Syllabus</h1>
-    <div class="pdf-line">
+    <div class="highlight-box">
+      <h1>Syllabus</h1>
+    </div>
+    <div class="highlight-box">
       <a class="pdf-link" href="syllabus.pdf" target="_blank">Click here to view the syllabus (PDF)</a>
     </div>
   </div>
