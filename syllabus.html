@@ -7,56 +7,49 @@
   <style>
     :root { --bg:#000; --fg:#fff; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body::before{
-      content:"";
+
+    body::before {
+      content: "";
       position: fixed;
       inset: 0;
-      background: #000;
+      background: url('bg.jpg') center/cover no-repeat;
       z-index: -2;
     }
 
     body {
-      font-family:"Times New Roman", Georgia, serif;
-      color: #39ff14;
-      background: #000;
+      font-family: "Times New Roman", Georgia, serif;
+      color: #39ff14; /* neon green from block 2 */
+      background: var(--bg);
       display: grid;
       place-items: center;
       padding: 32px;
       min-height: 100vh;
     }
 
-    .container{ 
+    .container {
       max-width: 700px;
       width: 100%;
+      text-align: center;
     }
 
-    h1{ 
-      text-align: center;
+    h1 {
       font-size: 32px;
-      margin: 0 0 32px 0;
+      margin-bottom: 32px;
       letter-spacing: 1.5px;
     }
 
-    .content {
-      font-size: 18px;
-      line-height: 1.8;
+    a.pdf-link {
+      color: #39ff14;
+      text-decoration: underline;
+      font-size: 20px;
+      transition: opacity 0.2s ease;
     }
 
-    .content p {
-      margin-bottom: 16px;
+    a.pdf-link:hover {
+      opacity: 0.7;
     }
 
-    .content ul {
-      margin: 16px 0;
-      padding-left: 24px;
-    }
-
-    .content li {
-      margin-bottom: 8px;
-    }
-
-    .back-link{
+    .back-link {
       position: fixed;
       top: 12px;
       left: 12px;
@@ -71,7 +64,7 @@
       z-index: 100;
     }
 
-    .back-link:hover{
+    .back-link:hover {
       background: var(--fg);
       color: var(--bg);
     }
@@ -79,14 +72,12 @@
 </head>
 <body>
   <a class="back-link" href="index.html">← Back</a>
-  
+
   <div class="container">
     <h1>Syllabus</h1>
-    <div class="content">
-      <p style="text-align: center;">
-        <a href="syllabus.pdf" style="color: #39ff14; text-decoration: underline;" target="_blank">Click here</a>
-      </p>
-    </div>
+    <p>
+      <a class="pdf-link" href="syllabus.pdf" target="_blank">Click here to view the syllabus (PDF)</a>
+    </p>
   </div>
 </body>
 </html>
