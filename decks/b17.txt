@@ -1,30 +1,29 @@
 Tōtum diem discō (I work all day... a dialogue medley) = “My horse must work according to my step.” —Propertius, iv.
 
-What does he or she want = Quid vult
-He or she wants to enter = Vult intrāre
-He or she wants to go out of the house = Vult domō exīre
-He or she wants to enter the house = Vult domum intrāre
+What does he or she want? = Quid vult?
+He/she wants to enter = Vult intrāre
+He/she wants to go out of the house = Vult domō exīre
+He/she wants to enter the house = Vult domum intrāre
 
-Alban are you able to speak Japanese = Albāne potesne Iaponicē loquī
-I can or I cannot = Possum Nōn possum
-Can you Alban Speak = Potes Albāne Loquere
-Kon’nichiwa = (Kon’nichiwa)
+Alban are you able to speak Japanese? = Albāne potesne Iaponicē loquī?
+I can/I can't = Possum/Nōn possum
+Albane, can you speak? = Potes Albāne loquere?
 
-Stephen can you run = Stephane potesne currere
-I can or I cannot = Possum Nōn possum
-Can you Stephen Run = Potes Stephane Curre
+Stephen can you run? = Stephane potesne currere?
+I can/I can't = Possum/Nōn possum
+Stephen, can you run? = Potes Stephane curre?
 
-Julia can you lift your leg = Iūlia potesne tollere crus
+Julia can you lift your leg? = Iūlia potesne tollere crus?
 I can = Possum
-Lift your leg = Tolle crus
+Lift your leg! = Tolle crus!
 
-What do you want = Quid vīs
+What do you want? = Quid vīs?
 I want to eat = Volō edere
 I am hungry = Ēsuriō
 Eat = Ēde
 I eat = Edō
 
-What do you want = Quid vīs
+What do you want? = Quid vīs?
 I want to drink = Volō bibere
 I am thirsty = Sitiō
 Drink = Bibe
