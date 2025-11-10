@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Fasciculī</title></title>
   <style>
+    .topleft{ position: fixed; top: 12px; left: 12px; color: var(--fg); text-decoration: none; border: 2px solid var(--fg); border-radius: 999px; padding: 6px 16px; font-size: 14px; background: rgba(0,0,0,0.6); transition: all 0.15s ease; z-index: 100; }
+.topleft:hover{ opacity: 0.7; }
+    
     :root { --bg:#000; --fg:#fff; --muted:#9a9a9a; }
     *{ box-sizing:border-box }
     html,body{ height:100%; margin:0 }
@@ -75,11 +78,6 @@
 </head>
 <body>
   <a class="topleft" href="syllabus.html">Syllabus</a>
-
-<style>
-.topleft{ position: fixed; top: 12px; left: 12px; color: var(--fg); text-decoration: none; border: 2px solid var(--fg); border-radius: 999px; padding: 6px 16px; font-size: 14px; background: rgba(0,0,0,0.6); transition: all 0.15s ease; z-index: 100; }
-.topleft:hover{ opacity: 0.7; }
-  
   <a class="toplink" href="decks.html">Fasciculī</a>
   <main class="app" id="app">
     <div class="shuffle-btn">
