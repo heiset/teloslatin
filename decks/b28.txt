@@ -1,0 +1,36 @@
+Urbis Loca =  “Amidst that smother Neptune holds his place, / Below the walls’ foundation drives his mace, / And heaves the city from its solid base." —Virgil, Book 2, 5.1
+
+bank = Argentāria (f., 1st)
+library = Bibliothēca (f., 1st)
+movie theater = Cinematographus (m., 2nd)
+town hall / senate house = Cūria (f., 1st)
+post office / public courier = Cursus Pūblicus (m., 4th + adj.)
+bookstore = Librāria (f., 1st)
+school = Lūdus (m., 2nd)
+market = Mercātus (m., 4th)
+pharmacy = Pharmacopōlium (n., 2nd)
+bakery = Pistrīna (f., 1st)
+restaurant / tavern = Popīna (f., 1st)
+shop = Taberna (f., 1st)
+
+Octavia is in the bakery = Octāvia in pistrīnā est
+Sextus returns from the library = Sextus ā bibliothēcā redit
+Stephen returns from the market = Stephanus ā mercātū redit
+Octavia goes with her mother to school = Octāvia cum matrē ad lūdum it
+Stephen enters the bank = Stephanus in argentāriam intrat
+Stephen returns from the town hall = Stephanus ē cūriā redit
+
+Go to the restaurant on foot = Ī ad popīnam pedibus
+restaurant = popīna
+
+Go to the bookstore by bicycle = Ī ad librāriam bīrotā
+bookstore = librāria
+
+Go to the pharmacy by car = Ī ad pharmacopōlium raedā
+pharmacy = pharmacopōlium
+
+Go to the shop by bus = Ī ad tabernam currū pūblicō
+shop = taberna
+
+Go to the market by train = Ī ad mercātum trāmine
+market = mercātus

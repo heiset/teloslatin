@@ -1,0 +1,85 @@
+Imperātīva (Commands) = "Agesilaus sent his children to Sparta to learn how to obey and to command.” —Plutarch, Life of Agesilaus, c. 7.
+
+Get up! = Surge!
+What are you doing? = Quid facis?
+What am I doing? I’m getting up = Quid faciō? Surgō
+What is Stephanus doing? = Quid facit Stephanus?
+Stephanus is getting up = Stephanus surgit
+
+Go to the board! = Ī ad tabulam!
+Are you going to the board? = Isne ad tabulam?
+I’m going to the board = Eō ad tabulam
+Stephanus is going to the board = Stephanus it ad tabulam
+
+Write on the board! = Scrībe in tabulā!
+What are you doing? Are you writing? = Quid facis? Scrībisne?
+I’m writing on the board = Scrībō in tabulā
+Stephanus is writing on the board = Stephanus scrībit in tabulā
+
+Return to your seat! = Revertere ad sellam tuam!
+Are you returning? = Reverterisne?
+What are you doing? = Quid facis?
+What am I doing? I’m returning to my seat = Quid faciō? Revertor ad sellam
+Stephanus is returning to his seat = Stephanus revertitur ad sellam
+
+I am coming = Veniō
+Come! = Venī!
+Are you coming? = Venīsne?
+Stephanus is coming = Stephanus venit
+
+I follow = Sequor
+Follow me! = Sequere mē!
+Are you following? = Sequerisne?
+Stephanus is following = Stephanus sequitur
+
+Run! = Curre!
+Are you running? = Currisne?
+I’m running = Currō
+Stephanus is running = Stephanus currit
+
+Stop! = Cōnsiste!
+Are you stopping? = Cōnsistisne?
+I’m stopping = Cōnsistō
+Stephanus is stopping = Stephanus cōnsistit
+
+Get up! = Surge!
+Are you getting up? = Surgisne?
+What are you doing? = Quid facis?
+I’m getting up = Surgō
+Stephanus is getting up = Stephanus surgit
+
+Walk! = Ambulā!
+Are you walking? = Ambulāsne?
+What are you doing? = Quid facis?
+I’m walking = Ambulō
+Stephanus is walking = Stephanus ambulat
+
+Jump! = Salī!
+Are you jumping? = Salīsne?
+I’m jumping = Saliō
+Stephanus is jumping = Stephanus salit
+
+Sit down! = Cōnsīde!
+Are you sitting down? = Cōnsīdisne?
+I’m sitting down = Cōnsīdō
+Stephanus is sitting down = Stephanus cōnsīdit
+
+I am coming = Veniō
+Come here! = Venī hūc!
+Are you coming? = Venīsne?
+Stephanus is coming = Stephanus venit
+
+I follow = Sequor
+Follow me! = Sequere mē!
+Are you following? = Sequerisne?
+Stephanus is following = Stephanus sequitur
+
+I turn = Vertor
+Turn! = Verte!
+Are you turning? = Verterisne?
+Stephanus is turning = Stephanus vertitur
+
+I walk = Ambulō
+Walk! = Ambulā!
+Are you walking? = Ambulāsne?
+Stephanus is walking = Stephanus ambulat
