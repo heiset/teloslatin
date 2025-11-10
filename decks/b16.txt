@@ -40,3 +40,4 @@ Speak! in English/French/Greek = Loquere Anglicē! / Gallicē! / Graecē!
 Sing! = Canē!
 Whistle! = Sībilā!
 Bark! = Lātrā!
+Don't fart! = Nē flātum emitte!
