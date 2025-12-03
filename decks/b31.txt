@@ -1,0 +1,17 @@
+Review Dialogue Medley (Cape, ede!) = “When I review, I see one passage after another that should be erased.” —Ovid
+
+Take the apple! Are you taking it? = Cape mālum! Capisne?
+I’m taking it = Capiō
+Alban takes the apple = Albānus mālum capit
+
+Eat the apple! Are you eating it? = Ede mālum! Edīsne?
+I’m eating it = Edō
+Alban eats the apple = Albānus mālum edit
+
+Take the cup! Are you taking it? = Cape pōculum! Capisne?
+I’m taking it = Capiō
+Alban takes the cup = Albānus pōculum capit
+
+Drink! Are you drinking? = Bibe! Bibisne?
+I’m drinking = Bibō
+Alban drinks = Albānus bibit

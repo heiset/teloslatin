@@ -1,0 +1,25 @@
+Review Dialogue Medley = “When I review, I see one passage after another that should be erased.” —Ovid
+
+Knock on the door. Are you knocking? = Ōstium pulsā. Pulsāsne?
+I’m knocking on the door = Ōstium pulsō
+Stephen knocks on the door = Stephanus ōstium pulsat
+
+Open the door! Are you opening it? = Ōstium aperī! Aperīsne?
+I’m opening the door = Ōstium aperiō
+Stephen opens the door = Stephanus ōstium aperit
+
+Enter the room. Are you entering? = Intrā in conclāve. Intrāsne?
+I’m entering = Intrō
+Stephen enters the room = Stephanus in conclāve intrat
+
+Close the door! Are you closing it? = Claude ōstium! Claudisne?
+I’m closing it = Claudō
+Stephen closes the door = Stephanus ōstium claudit
+
+Open the door! Are you opening it? = Aperī ōstium! Aperīsne?
+I’m opening it = Aperiō
+Stephen opens the door = Stephanus ōstium aperit
+
+Go out of the room! Are you going out? = Exī ē conclāvī. Exīsne?
+I’m going out = Exeō
+Stephen goes out of the room = Stephanus ē conclāvī exit
