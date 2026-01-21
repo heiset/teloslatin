@@ -1,0 +1,14 @@
+Urbis Loca =  “Amidst that smother Neptune holds his place, / Below the walls’ foundation drives his mace, / And heaves the city from its solid base." —Virgil, Book 2, 5.1
+
+bank = Argentāria (f., 1st)
+library = Bibliothēca (f., 1st)
+movie theater = Cinematographus (m., 2nd)
+town hall / senate house = Cūria (f., 1st)
+post office / public courier = Cursus Pūblicus (m., 4th + adj.)
+bookstore = Librāria (f., 1st)
+school = Lūdus (m., 2nd)
+market = Mercātus (m., 4th)
+pharmacy = Pharmacopōlium (n., 2nd)
+bakery = Pistrīna (f., 1st)
+restaurant / tavern = Popīna (f., 1st)
+shop = Taberna (f., 1st)

@@ -1,0 +1,31 @@
+Ad Ōstium (Going out) = “That I may go out better...” —Plato (when asked why he studies philosophy at the end of his life)
+
+Go up. Are you going up? = Ascende. Ascendisne?
+Yes, I’m going up = Ita, ascendō
+Stephen goes up = Stephanus ascendit
+
+Go down. Are you going down? = Dēscende. Dēscendisne?
+Yes, I’m going down = Ita, dēscendō
+Stephen goes down = Stephanus dēscendit
+
+I’m coming. Come to the window! Are you coming? = Veniō. Venī ad fenestram! Venīsne?
+Fausta comes to the window = Fausta ad fenestram venit
+
+Open the window! Are you opening it? = Aperī fenestram! Aperīsne?
+I’m opening it = Aperiō
+Fausta opens the window = Fausta fenestram aperit
+
+Close the window! Are you closing it? = Claude fenestram! Claudisne?
+I’m closing it = Claudō
+Fausta closes the window = Fausta fenestram claudit
+
+I’m coming. Come to the door! Are you coming? = Veniō. Venī ad ōstium! Venīsne?
+Stephen comes to the door = Stephanus ad ōstium venit
+
+Open the door! Are you opening it? = Aperī ōstium! Aperīsne?
+I’m opening it = Aperiō
+Stephen opens the door = Stephanus ōstium aperit
+
+Go out! Are you going out? = Exī. Exīsne?
+I’m going out = Exeō
+The boy goes out. The girl points to the door = Puer exit. Puella ōstium mōnstrat
