@@ -1,4 +1,4 @@
-Urbis Loca =  “Amidst that smother Neptune holds his place, / Below the walls’ foundation drives his mace, / And heaves the city from its solid base." —Virgil, Book 2, 5.1
+Urbis Loca (Urban places) =  “Amidst that smother Neptune holds his place, / Below the walls’ foundation drives his mace, / And heaves the city from its solid base." —Virgil, Book 2, 5.1
 
 bank = Argentāria (f., 1st)
 library = Bibliothēca (f., 1st)
