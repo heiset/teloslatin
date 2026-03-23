@@ -1,0 +1,17 @@
+Imperātīvus Plūrālis (Adverbs & Action) = Ars longa, vita brevis — “Art is long, life is short” — Hippocrates
+
+Walk slowly = Ambulāte lente
+We walk = Ambulāmus
+
+Walk quickly = Ambulāte celeriter
+We walk = Ambulāmus
+
+Run slowly = Currite lente
+We run = Currimus
+
+Run quickly = Currite celeriter
+We run = Currimus
+
+How is he running? He runs slowly = Quōmodo currit? Lente currit
+
+How are they walking? They walk quickly = Quōmodo ambulant? Celeriter ambulant

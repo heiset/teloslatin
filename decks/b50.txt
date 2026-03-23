@@ -1,6 +1,23 @@
-Videō (Pronōmina) = "Video, ergō sum"—adapted
+Nōndum (Not Yet — Exīre & Ōstia) = Tempus fugit — “Time flies” — Virgil
 
-I see you (sing.) = Tē videō
-Ita, mē vidēs = Yes, you see me
-I see you all = Vōs videō
-Ita, nōs vidēs = Yes, you see us
+Go out = Exīte
+Are you going out? = Exītisne?
+We are going out = Exīmus
+The boys go out = Puerī exeunt
+
+Close the doors = Claudite ōstia
+What are you closing? = Quid clauditis?
+They close the doors = Ōstia claudunt
+
+Knock on the doors = Pulsāte ōstia
+What are you knocking? = Quid pulsātis?
+We knock on the doors = Ōstia pulsāmus
+
+Open the doors = Aperite ōstia
+What are you opening? = Quid aperītis?
+They open the doors = Ōstia aperiunt
+We open the doors = Ōstia aperīmus
+
+Enter. Are you not entering yet? = Intrāte. Nōndum intrātis?
+We are entering = Intrāmus
+They enter = Intrant

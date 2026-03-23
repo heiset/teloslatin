@@ -1,0 +1,10 @@
+Possum = "Possum quia posse videor"—Vergil (adapted)
+
+I can heal = Possum cūrāre
+I cannot teach = Nōn possum docēre
+I can teach = Possum docēre
+I cannot heal = Nōn possum cūrāre
+I can plead cases = Possum causās dīcere
+I cannot cook = Nōn possum coquere
+I can cook = Possum coquere
+I cannot argue cases = Nōn possum causās agere

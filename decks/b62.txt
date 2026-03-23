@@ -1,0 +1,19 @@
+Quis? Quem? Cui? Quibus? (Cases & Roles) = Homo sum — “I am a human being” — Terence
+
+Hello = Salvē
+
+Who greets? = Quis salūtat?
+The teacher greets = Magister salūtat
+
+Whom does he greet? = Quem salūtat?
+The teacher greets the student = Magister discipulum salūtat
+
+Give me your book = Dā mihi librum tuum
+
+To whom does the student give the book? = Cui discipulus librum dat?
+He gives the book to the teacher = Magistrō librum dat
+
+Take the coin = Capite aes
+
+To whom does the teacher give the coin? = Quibus magister aes dat?
+To the students = Discipulīs
