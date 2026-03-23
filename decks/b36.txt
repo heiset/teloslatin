@@ -1,0 +1,14 @@
+Cape, Ede = "Nihil est in intellectū quod nōn prius fuerit in sensū"—Aristotle
+
+Take the apple = Cape mālum
+Do you take it? = Capisne?
+I take it = Capiō
+He takes the apple = Mālum capit
+Eat the apple = Ede mālum
+Do you eat? = Edīsne?
+I eat = Edō
+He eats the apple = Mālum edit
+Take the cup = Cape pōculum
+Drink = Bibe
+I drink = Bibō
+He drinks = Bibit

@@ -1,0 +1,8 @@
+Prandia = "Vīvere est edere"—Proverb
+
+In the morning we have breakfast = Mānē ientāculum habēmus
+In the morning we eat breakfast = Mānē ientāmus
+At midday we have lunch = Merīdiē prandium habēmus
+At midday we eat lunch = Merīdiē prandēmus
+In the evening we have dinner = Vesperī cēnam habēmus
+In the evening we eat dinner = Vesperī cēnāmus

@@ -1,0 +1,10 @@
+Placet = "Amor vincit omnia"—Vergil
+
+Do you like wine? = Placetne tibi vīnum?
+I like it very much = Valdē placet
+Do you like cookies? = Placetne tibi crustula?
+Not at all = Nēquāquam
+Do you like chicken? = Placetne tibi pullīna?
+Maybe = Fortasse
+I like to speak with you = Mihi placet tēcum loquī
+I do not like it = Nōn placet

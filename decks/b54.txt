@@ -1,0 +1,16 @@
+Salūtātiō et Dātīvus = "Salvēte, amīcī"—Common Latin
+
+Hello = Salvē
+The teacher greets = Magister salūtat
+Who greets? = Quis salūtat?
+
+The teacher greets the student = Magister discipulum salūtat
+Whom does he greet? = Quem salūtat?
+
+Give me your book = Dā mihi librum tuum
+The student gives a book to the teacher = Discipulus magistrō librum dat
+To whom does he give the book? = Cui discipulus librum dat?
+
+Take the money = Capite aes
+To whom does the teacher give money? = Quibus magister aes dat?
+To the students = Discipulīs

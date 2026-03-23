@@ -1,0 +1,11 @@
+Mūnera (Professions) = "Labor omnia vincit"—Vergil
+
+What is your job? = Quod est mūnus tuum?
+I am a master / slave / maid = Dominus sum / Servus sum / Ancilla sum
+I am a cook / innkeeper = Coquus sum / Caupō sum
+I work in the field → farmer = Operam dō in agrō → agricola sum
+I work in school → teacher = Operam dō in lūdō → magistra sum
+I work in kitchen → cook = Operam dō in culīnā → coquus sum
+I work in post → mailman = Operam dō in cursū pūblicō → tabellārius sum
+I work in court → lawyer = Operam dō in tribūnālī → pātrōnus sum
+I work in hospital → doctor = Operam dō in valētūdināriō → medicus sum
