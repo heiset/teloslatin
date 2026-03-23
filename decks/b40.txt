@@ -1,4 +1,4 @@
-Possum = "Possum quia posse videor"—Vergil (adapted)
+Possum (I can) = "Possum quia posse videor"—Vergil (adapted)
 
 I can heal = Possum cūrāre
 I cannot teach = Nōn possum docēre
