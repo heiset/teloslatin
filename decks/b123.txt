@@ -1,0 +1,11 @@
+Kalendae, Nōnae, Īdūs (Roman Dates) = Tempus edax rērum — “Time, devourer of all things” — Ovid
+
+What day of the month is it today? = Hodiē quī diēs mēnsis est
+On the Kalends of April = Kalendīs Aprīlibus
+Six days before the Kalends of December = Ante diem sextum Kalendās Decembrēs
+Four days before the Kalends of February = Ante diem quartum Kalendās Februāriās
+On the Nones of September = Nōnīs Septembribus
+On the Ides of May = Īdibus Māiīs
+The day before the Ides of March = Prīdiē Īdūs Mārtiās
+Three days before the Nones of June = Ante diem tertium Nōnās Iūniās
+Five days before the Ides of August = Ante diem quīntum Īdūs Augustās

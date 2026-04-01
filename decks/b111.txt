@@ -1,0 +1,9 @@
+Rogō aliquid; Cōnsentiō = Quaerēns invenit — “He who seeks finds” — proverb
+Dā mihi librum quaesō magister = Please give me the book teacher
+Discipula magistrum librum rogat = The student asks the teacher for the book
+Magister librum discipulae dat = The teacher gives the book to the student
+Discipulus magistrum librum rogat = The student asks the teacher for the book
+Magister nōn vult librum eī dare = The teacher does not want to give him the book
+Magister librum discipulō nōn dat = The teacher does not give the student the book
+Magister librum eī dare cōnsentit = The teacher agrees to give him the book
+Magister librum discipulō dat = The teacher gives the book to the student

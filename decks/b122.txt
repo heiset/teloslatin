@@ -1,0 +1,14 @@
+Mēnsēs (Months) = Omnium rerum principia parva sunt — “The beginnings of all things are small” — Cicero
+
+January, first month = Mēnsis Iānuārius, prīmus mēnsis
+February, second month = Mēnsis Februārius, secundus mēnsis
+March, third month = Mēnsis Mārtius, tertius mēnsis
+April, fourth month = Mēnsis Aprīlis, quartus mēnsis
+May, fifth month = Mēnsis Māius, quīntus mēnsis
+June, sixth month = Mēnsis Iūnius, sextus mēnsis
+July, seventh month = Mēnsis Iūlius, septimus mēnsis
+August, eighth month = Mēnsis Augustus, octāvus mēnsis
+September, ninth month = Mēnsis September, nōnus mēnsis
+October, tenth month = Mēnsis Octōber, decimus mēnsis
+November, eleventh month = Mēnsis November, ūndecimus mēnsis
+December, twelfth month = Mēnsis December, duodecimus mēnsis

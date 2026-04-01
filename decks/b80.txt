@@ -1,0 +1,13 @@
+Cuius Colōris? (Colors) = Color omnibus est commune bonum — “Color is a common good to all” — Seneca
+Cuius colōris est caelum? = What color is the sky?
+Caelum caeruleum est = The sky is blue
+Cuius colōris est stella? = What color is the star?
+Stella flāva est = The star is yellow
+Cuius colōris est rosa? = What color is the rose?
+Rosa alba est = The rose is white
+Cuius colōris est mālum? = What color is the apple?
+Mālum rubrum est = The apple is red
+Cuius colōris est rāna? = What color is the frog?
+Rāna viridis est = The frog is green
+Cuius colōris est equus? = What color is the horse?
+Equus niger est = The horse is black

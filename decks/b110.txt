@@ -1,0 +1,6 @@
+Dīcō… Quaerō utrum… an… = Verba volant — “Words fly” — proverb
+Dīcō Albānum abesse Stephanum autem adesse = I say that Albanus is absent but Stephanus is present
+Discipulus numerum quaerit = The student asks for the number
+Discipulus ex magistrō numerum quaerit = The student asks the teacher for the number
+Discipulus quaerit utrum tria sint an quattuor = The student asks whether it is three or four
+Magister discipulō respondet numerum esse quattuor = The teacher answers the student that the number is four

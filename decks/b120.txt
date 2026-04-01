@@ -1,0 +1,17 @@
+Hōrae (Telling Time) = Omnia tempus habent — “All things have their time” — Ecclesiastes
+
+What hour is it? = Quota hōra est
+It is the first hour = Hōra prīma est
+It is the second hour = Hōra secunda est
+It is the third hour = Hōra tertia est
+It is the fourth hour = Hōra quarta est
+It is the fifth hour = Hōra quīnta est
+It is the sixth hour = Hōra sexta est
+It is the seventh hour = Hōra septima est
+It is the ninth hour = Hōra nōna est
+It is the tenth hour = Hōra decima est
+It is the eleventh hour = Hōra ūndecima est
+Midday = Merīdiēs
+Midnight = Media nox
+It is the ninth hour of the day = Nōna hōra diēī est
+It is the ninth hour after midday = Nōna hōra est post merīdiem

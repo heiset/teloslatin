@@ -1,0 +1,10 @@
+Familia (Family) = Omnium societātum nulla praestantior est quam familia — “Of all associations none is more excellent than the family” — Cicero
+Ego = I
+Pater = father
+Māter = mother
+Frāter = brother
+Soror = sister
+Avus = grandfather
+Avia = grandmother
+Nepōs = grandson / nephew
+Neptis = granddaughter / niece

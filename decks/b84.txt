@@ -1,0 +1,17 @@
+Emere, Vendere, Quantī? (Buying, Selling, Price) = Pretium rerum non ex verbīs sed ex usu pendet — “The price of things depends not on words but on use” — Seneca
+Māla, māla, māla vendō! = Apples, apples, I sell apples
+Quantī cōnstat hoc mālum? = How much does this apple cost?
+Trium dēnāriōrum cōnstat = It costs three denarii
+Cārum est! Magnī cōnstat! = It is expensive! It costs a lot
+Nōn est cārum sed vīle! = It is not expensive but cheap
+Istud mālum emere nōlō = I do not want to buy that apple
+Crustula, crustula, crustula vendō! = Cookies, cookies, I sell cookies
+Quantī cōnstat hoc crustulum? = How much does this cookie cost?
+Duōrum dēnāriōrum cōnstat = It costs two denarii
+Pretium vīle est! Parvī cōnstat! = The price is cheap! It costs little
+Vērē vīle est pretium = The price is truly cheap
+Hoc crustulum emere volō = I want to buy this cookie
+X nōn emit mālum = X does not buy the apple
+Y nōn vēndit mālum = Y does not sell the apple
+Y vēndit crustulum = Y sells the cookie
+X emit crustulum = X buys the cookie
