@@ -1,0 +1,59 @@
+Dē “Quandō” et Adverbiīs Temporālibus (When/Time) = Tempus fugit — “Time flies” — Vergil
+
+Quandō puerī ad scholam eunt? = When do the boys go to school?
+Cottīdiē = Every day
+
+Quandō Nicolaus bibit? = When does Nicholas drink?
+Saepe = Often
+
+Quandō Philippus mātūrē ad lūdum pervenit? = When does Philip arrive early?
+Numquam = Never
+
+Quandō Philippus et Alexander natant? = When do they swim?
+Aliquando = Sometimes
+
+Quandō Albānus pēnsum magistrō dat? = When does Albanus give the assignment?
+Tertiō quōque diē = Every third day
+
+Quandō discipulī litterīs operam dant? = When do students work a long time?
+Tōtum diem = All day
+
+Quandō Philippus dormit? = When does Philip sleep?
+Tōtam noctem = All night
+
+Cottīdiē = Daily
+Saepe = Often
+Aliquando = Sometimes
+Numquam = Never
+Semel = Once
+Bis = Twice
+Ter = Three times
+
+Semel in hebdomade = Once per week
+Bis in hebdomade = Twice per week
+
+Quandō Philippus natat? = When does Philip swim?
+Semel in hebdomade, fēriā secundā = Once a week, on Monday
+
+Quandō Albānus pēnsum reddit? = When does Albanus turn in work?
+Bis in hebdomade, fēriīs tertiā et sextā = Twice a week, Tuesday and Friday
+
+Quandō puerī in lūdum eunt? = When do boys go to school?
+Cottīdiē = Every day
+
+Hodiē = Today
+Herī = Yesterday
+Nūdius tertius = Three days ago
+Crās = Tomorrow
+
+Quandō Stephanus cucurrit? = When did he run?
+Nūdius tertius = Three days ago
+
+Quandō Stephanus ambulāvit? = When did he walk?
+Herī = Yesterday
+
+Quandō Stephanus currit? = When does he run?
+Hodiē = Today
+
+Quandō Philippus natātūrus est? = When will he swim?
+Crās = Tomorrow
