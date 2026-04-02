@@ -116,7 +116,7 @@
       const titles = await res.json();
 
       deckList.innerHTML = '';
-      for (let i = 1; i <= 144; i++) {
+      for (let i = 1; i <= 135; i++) {
         const link = document.createElement('a');
         link.href = `index.html?deck=${i}`;
         link.textContent = titles[i] || `Deck ${i}`;
