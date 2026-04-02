@@ -107,37 +107,29 @@
     </div>
   </div>
 
-  <script>
-    const DECK_COUNT = 144;
-    const deckList = document.getElementById('deckList');
+<script>
+  const deckList = document.getElementById('deckList');
 
-    async function loadDeckFirstLine(deckNum) {
-      try {
-        const res = await fetch(`decks/b${deckNum}.txt`, {cache:'no-store'});
-        if (!res.ok) throw new Error('Failed to load');
-        const text = await res.text();
-        const firstLine = text.split('=')[0].trim();
-        return firstLine || `Deck ${deckNum}`;
-      } catch(e) {
-        return `Deck ${deckNum}`;
-      }
-    }
+  async function loadAllDecks() {
+    try {
+      const res = await fetch('decks/index.json');
+      const titles = await res.json();
 
-    async function loadAllDecks() {
       deckList.innerHTML = '';
-      
-      for (let i = 1; i <= DECK_COUNT; i++) {
-        const firstLine = await loadDeckFirstLine(i);
-        
+      for (let i = 1; i <= 144; i++) {
         const link = document.createElement('a');
         link.href = `index.html?deck=${i}`;
-        link.textContent = firstLine;
-        
+        link.textContent = titles[i] || `Deck ${i}`;
         deckList.appendChild(link);
       }
+    } catch(e) {
+      deckList.innerHTML = '<div class="loading">Failed to load decks.</div>';
+      console.error(e);
     }
+  }
 
-    loadAllDecks();
-  </script>
+  loadAllDecks();
+</script>
+  
 </body>
 </html>
