@@ -130,7 +130,99 @@
   </style>
 </head>
 <body>
-  <div class="screen">
+  <div class="screen"><style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #39ff14;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.45;
+  }
+
+  .screen {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background: #000;
+  }
+
+  .topnav {
+    margin-bottom: 16px;
+    background: #000;
+  }
+
+  .topnav a {
+    color: #39ff14;
+    text-decoration: none;
+    margin-right: 18px;
+    font-weight: bold;
+  }
+
+  .topnav a:hover {
+    text-decoration: underline;
+  }
+
+  #output {
+    white-space: pre-wrap;
+    min-height: 70vh;
+    margin-bottom: 12px;
+    background: #000;
+    color: #39ff14;
+  }
+
+  .inputline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #000;
+  }
+
+  .prompt {
+    color: #39ff14;
+    font-weight: bold;
+  }
+
+  input {
+    flex: 1;
+    background: #000;
+    color: #39ff14;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    font: inherit;
+    font-weight: bold;
+    caret-color: #39ff14;
+  }
+
+  button {
+    background: #000;
+    color: #39ff14;
+    border: 1px solid #39ff14;
+    font: inherit;
+    font-weight: bold;
+    padding: 4px 10px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #39ff14;
+    color: #000;
+  }
+
+  div, p, body, input, button {
+    background-color: #000;
+  }
+
+  ::selection {
+    background: #39ff14;
+    color: #000;
+  }
+</style>
     <div class="topnav">
       <a href="index.html">home</a>
       <a href="decks.html">decks</a>
