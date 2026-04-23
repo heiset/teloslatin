@@ -45,7 +45,110 @@
     <input id="answer" type="text" placeholder="scribe hic..." autocomplete="off" />
     <button id="submit">Responde</button>
   </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caverna Lunae</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0b0b0b;
+      color: #d6ffd6;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 18px;
+      line-height: 1.4;
+    }
 
+    .screen {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .topnav {
+      margin-bottom: 16px;
+    }
+
+    .topnav a {
+      color: #d6ffd6;
+      text-decoration: none;
+      margin-right: 18px;
+    }
+
+    .topnav a:hover {
+      text-decoration: underline;
+    }
+
+    #output {
+      white-space: pre-wrap;
+      min-height: 70vh;
+      margin-bottom: 12px;
+    }
+
+    .inputline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .prompt {
+      color: #d6ffd6;
+    }
+
+    input {
+      flex: 1;
+      background: #0b0b0b;
+      color: #d6ffd6;
+      border: none;
+      outline: none;
+      font: inherit;
+      caret-color: #d6ffd6;
+    }
+
+    button {
+      background: #0b0b0b;
+      color: #d6ffd6;
+      border: 1px solid #d6ffd6;
+      font: inherit;
+      padding: 4px 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #d6ffd6;
+      color: #0b0b0b;
+    }
+
+    ::selection {
+      background: #d6ffd6;
+      color: #0b0b0b;
+    }
+  </style>
+</head>
+<body>
+  <div class="screen">
+    <div class="topnav">
+      <a href="index.html">home</a>
+      <a href="decks.html">decks</a>
+      <a href="game.html">caverna lunae</a>
+    </div>
+
+    <div id="output"></div>
+
+    <div class="inputline">
+      <span class="prompt">></span>
+      <input id="answer" type="text" autocomplete="off" spellcheck="false" />
+      <button id="submit">enter</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
   <script src="game.js"></script>
 </body>
 </html>
