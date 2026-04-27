@@ -22,8 +22,9 @@ function pointsForQuestion(i) {
 const interludes = {
   0: [
     "Edward Gibbon adjusts his powdered wig.",
-    '"My small assistant," he says, "A tiny Roman mouse named Publius Nibblius has eaten some of my notes!",
-    "Your mission: restore the memories." "PRESS ENTER TO CONTINUE",
+    "\"My small assistant,\" he says, \"A tiny Roman mouse named Publius Nibblius has eaten some of my notes!\"",
+    "Your mission: restore the memories.",
+    "PRESS ENTER TO CONTINUE",
     ""
   ],
   12: [
