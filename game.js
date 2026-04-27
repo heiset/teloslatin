@@ -22,12 +22,8 @@ function pointsForQuestion(i) {
 const interludes = {
   0: [
     "Edward Gibbon adjusts his powdered wig.",
-    '"My small assistant," he says, "Rome is enormous, confusing, glorious, and badly filed."',
-    "Fun fact: Gibbon was an English historian who became famous for writing The Decline and Fall of the Roman Empire.",
-    "Fun fact: He worked for years and years on it, which means he would absolutely understand homework that gets out of control.",
-    "Fun fact: He liked huge causes, huge empires, huge sentences, and probably huge piles of paper.",
-    "A tiny Roman mouse named Publius Nibblius has eaten some of his notes.",
-    "Your job: answer questions, restore memory, and help Gibbon keep Rome from becoming a rumor about pizza ovens.",
+    '"My small assistant," he says, "A tiny Roman mouse named Publius Nibblius has eaten some of my notes!",
+    "Your mission: restore the memories." "PRESS ENTER TO CONTINUE",
     ""
   ],
   12: [
