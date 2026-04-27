@@ -21,7 +21,59 @@
 
     #output {
       white-space: pre-wrap;
+    }<!DOCTYPE html>
+<html lang="la">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archivum Romae</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #000;
+      font-family: Papyrus, "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 24px;
+      line-height: 1.45;
     }
+
+    body {
+      padding: 24px;
+    }
+
+    #output {
+      white-space: pre-wrap;
+    }
+
+    #answer {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: transparent;
+      caret-color: #000;
+      font: inherit;
+      width: 1px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .cursor {
+      display: inline-block;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="output"></div>
+  <input id="answer" type="text" autocomplete="off" spellcheck="false" autofocus />
+  <script src="game.js"></script>
+</body>
+</html>
 
     #answer {
       position: absolute;
