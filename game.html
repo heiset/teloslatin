@@ -1,38 +1,15 @@
 <!DOCTYPE html>
-<html lang="la">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Caverna Lunae</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #fff;
-      color: #000;
-      font-family: Papyrus, "Palatino Linotype", "Book Antiqua", Palatino, serif;
-      font-size: 24px;
-      line-height: 1.45;
-    }
-
-    body {
-      padding: 24px;
-    }
-
-    #output {
-      white-space: pre-wrap;
-    }<!DOCTYPE html>
-<html lang="la">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Archivum Romae</title>
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background: #fff;
-      color: #000;
+      background: white;
+      color: black;
       font-family: Papyrus, "Palatino Linotype", "Book Antiqua", Palatino, serif;
       font-size: 24px;
       line-height: 1.45;
@@ -40,77 +17,35 @@
 
     body {
       padding: 24px;
+      padding-bottom: 90px;
     }
 
     #output {
       white-space: pre-wrap;
     }
 
-    #answer {
-      background: transparent;
-      border: none;
-      outline: none;
-      color: transparent;
-      caret-color: #000;
-      font: inherit;
-      width: 1px;
-      padding: 0;
-      margin: 0;
+    #inputLine {
+      position: fixed;
+      left: 24px;
+      right: 24px;
+      bottom: 18px;
+      background: white;
     }
 
-    .cursor {
+    #promptMark {
       display: inline-block;
-      animation: blink 1s steps(1) infinite;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-  </style>
-</head>
-<body>
-  <div id="output"></div>
-  <input id="answer" type="text" autocomplete="off" spellcheck="false" autofocus />
-  <script src="game.js"></script>
-</body>
-</html>
-
-    #answer {<!DOCTYPE html>
-<html lang="la">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Archivum Romae</title>
-
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #fff;
-      color: #000;
-      font-family: Papyrus, "Palatino Linotype", "Book Antiqua", Palatino, serif;
-      font-size: 24px;
-      line-height: 1.45;
-    }
-
-    body {
-      padding: 24px;
-    }
-
-    #output {
-      white-space: pre-wrap;
     }
 
     #answer {
       border: none;
       outline: none;
-      background: transparent;
-      color: #000;
-      caret-color: #000;
-      font: inherit;
-      width: 90vw;
-      padding: 0;
-      margin: 0;
+      background: white;
+      color: black;
+      caret-color: black;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      width: 80%;
     }
 
     .cursor {
@@ -121,31 +56,11 @@
 
 <body>
   <div id="output"></div>
-  <input id="answer" type="text" autocomplete="off" spellcheck="false" autofocus />
 
-  <script src="game.js"></script>
-</body>
-</html>
-      position: absolute;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-    }
+  <div id="inputLine">
+    <span id="promptMark">&gt; </span><input id="answer" type="text" autocomplete="off" spellcheck="false" autofocus>
+  </div>
 
-    .cursor {
-      display: inline-block;
-      animation: blink 1s steps(1) infinite;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-  </style>
-</head>
-<body>
-  <div id="output"></div>
-  <input id="answer" type="text" autocomplete="off" spellcheck="false" autofocus />
   <script src="game.js"></script>
 </body>
 </html>
