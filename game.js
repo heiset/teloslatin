@@ -1,19 +1,492 @@
 const output = document.getElementById("output");
 const answerBox = document.getElementById("answer");
 
-let state = "boot";
-let lives = 3;
+let state = "name";
+let playerName = "historian";
 let score = 0;
-let playerName = "discipule";
+let qIndex = 0;
+let tries = 0;
+let conserved = [];
 let inventory = [];
-let flags = {
-  habesClavem: false,
-  habesCrustulum: false,
-  habesCalamum: false,
-  viditLunam: false,
-  dixitVale: false,
-  sacerdosPlacatus: false
-};
+
+const MAX_SCORE = 2778;
+
+// 36 questions. First 6 are worth 78, remaining 30 are worth 77.
+// 6(78) + 30(77) = 2778.
+function pointsForQuestion(i) {
+  return i < 6 ? 78 : 77;
+}
+
+const questions = [
+  {
+    type: "vocab",
+    title: "THE DOOR OF THE SHE-WOLF",
+    prompt: [
+      "A bronze wolf blocks the archive.",
+      "English question: What is the Latin greeting for one person: hello?",
+      "Answer with one Latin word."
+    ],
+    answers: ["salve"],
+    success: "salve. lupa annuit.",
+    hint: "It is the singular hello.",
+    correction: "Answer: salve."
+  },
+  {
+    type: "history",
+    title: "THE LITTLE VALLEY",
+    prompt: [
+      "A small valley appears between seven cardboard hills.",
+      "English question: According to the video, the first Romans mixed and mingled in the valley that became what place?",
+      "Answer in English, one or two words."
+    ],
+    answers: ["forum", "roman forum", "the forum"],
+    success: "Correct.",
+    hint: "It became Rome's central public space.",
+    correction: "Answer: forum."
+  },
+  {
+    type: "vocab",
+    title: "THE SENATOR WITH A LAMP",
+    prompt: [
+      "Senator Lucius Lampadius drops a wax tablet.",
+      "English question: How do you say 'I am here' in one Latin word?",
+      "Answer with one Latin word."
+    ],
+    answers: ["adsum"],
+    success: "adsum. praesens es.",
+    hint: "This is the classroom attendance word.",
+    correction: "Answer: adsum."
+  },
+  {
+    type: "history",
+    title: "THE YEAR OF NO KINGS",
+    prompt: [
+      "A king-shaped scarecrow is thrown into the Tiber.",
+      "English question: In what year did Rome toss out its king and establish the Republic?",
+      "Answer with the year only."
+    ],
+    answers: ["509", "509 bc", "509 bce"],
+    success: "Correct.",
+    hint: "It is five hundred nine B.C.",
+    correction: "Answer: 509."
+  },
+  {
+    type: "vocab",
+    title: "THE CHAIR THAT BREATHES",
+    prompt: [
+      "A chair whispers: 'Students never sit correctly anymore.'",
+      "English question: What is the Latin command 'sit down'?",
+      "Answer with one Latin word."
+    ],
+    answers: ["conside", "considete"],
+    success: "conside. sella contenta est.",
+    hint: "Singular command is best, but plural is accepted.",
+    correction: "Answer: conside."
+  },
+  {
+    type: "history",
+    title: "THE TWO BROTHERS",
+    prompt: [
+      "Two ghost babies argue over city planning.",
+      "English question: According to legend, which two brothers founded Rome?",
+      "Answer with both names."
+    ],
+    answers: ["romulus and remus", "romulus remus", "remus and romulus", "remus romulus"],
+    success: "Correct.",
+    hint: "One brother gives Rome its name.",
+    correction: "Answer: Romulus and Remus."
+  },
+  {
+    type: "vocab",
+    title: "THE CHALK STORM",
+    prompt: [
+      "A storm of chalk dust forms the shape of a question mark.",
+      "English question: What is the Latin classroom word for board?",
+      "Answer with one Latin word."
+    ],
+    answers: ["tabula"],
+    success: "tabula. creta cadit.",
+    hint: "It is also the thing you write on.",
+    correction: "Answer: tabula."
+  },
+  {
+    type: "history",
+    title: "THE UNELECTED MASK",
+    prompt: [
+      "A marble mask says: 'Republic? Empire? Choose carefully.'",
+      "English question: In the video, the Republic was ruled by elected senators. The Empire was ruled by unelected what?",
+      "Answer with one English word."
+    ],
+    answers: ["emperors", "emperor"],
+    success: "Correct.",
+    hint: "Caesar helped start this change.",
+    correction: "Answer: emperors."
+  },
+  {
+    type: "vocab",
+    title: "THE BACKPACK OF DESTINY",
+    prompt: [
+      "A backpack crawls across the floor like a crab.",
+      "English question: What is one Latin word for backpack?",
+      "Answer with one Latin word."
+    ],
+    answers: ["bulga", "saccus"],
+    success: "bulga. sarcina viva quiescit.",
+    hint: "Either classroom word is accepted.",
+    correction: "Answer: bulga or saccus."
+  },
+  {
+    type: "history",
+    title: "THE MONTH OF CAESAR",
+    prompt: [
+      "Julius Caesar points at a calendar with a sword.",
+      "English question: What month was named in Caesar's honor?",
+      "Answer with one English word."
+    ],
+    answers: ["july"],
+    success: "Correct.",
+    hint: "It comes after June.",
+    correction: "Answer: July."
+  },
+  {
+    type: "vocab",
+    title: "THE WINDOW WITH EYES",
+    prompt: [
+      "A window blinks. The historian Piso is worried.",
+      "English question: What is the Latin classroom word for window?",
+      "Answer with one Latin word."
+    ],
+    answers: ["fenestra"],
+    success: "fenestra. oculus parietis aperitur.",
+    hint: "It begins with f.",
+    correction: "Answer: fenestra."
+  },
+  {
+    type: "history",
+    title: "THE BURNT SPOT",
+    prompt: [
+      "A tiny flame appears in the Forum.",
+      "English question: In what year B.C. was Julius Caesar assassinated?",
+      "Answer with the year only."
+    ],
+    answers: ["44", "44 bc", "44 bce"],
+    success: "Correct.",
+    hint: "Forty-four B.C.",
+    correction: "Answer: 44."
+  },
+  {
+    type: "vocab",
+    title: "THE PEN OF DOOM",
+    prompt: [
+      "A pen signs a treaty with a mouse.",
+      "English question: What is the Latin classroom word for pen?",
+      "Answer with one Latin word."
+    ],
+    answers: ["calamus"],
+    success: "calamus. atramentum ridet.",
+    hint: "It is not graphis.",
+    correction: "Answer: calamus."
+  },
+  {
+    type: "history",
+    title: "THE SACRED STREET",
+    prompt: [
+      "A road made of old applause stretches before you.",
+      "English question: What was the main street of ancient Rome called?",
+      "Answer in Latin or English."
+    ],
+    answers: ["via sacra", "sacred way", "the sacred way"],
+    success: "Correct.",
+    hint: "It means Sacred Way.",
+    correction: "Answer: Via Sacra."
+  },
+  {
+    type: "vocab",
+    title: "THE TINY NURSE SHRINE",
+    prompt: [
+      "A small shrine asks for school phrases.",
+      "English question: How do you say 'I do not understand' in Latin?",
+      "Answer with the short Latin phrase."
+    ],
+    answers: ["non intellego", "non intellegō"],
+    success: "non intellego. tamen procedis.",
+    hint: "Two words: non + I understand.",
+    correction: "Answer: non intellego."
+  },
+  {
+    type: "history",
+    title: "THE PUBLIC RELATIONS ARCH",
+    prompt: [
+      "An arch coughs up a pamphlet titled IMPERIAL SPIN.",
+      "English question: The video says triumphal arches functioned as what kind of tools?",
+      "Answer with two or three English words."
+    ],
+    answers: ["public relations", "public relations tools", "pr", "pr tools"],
+    success: "Correct.",
+    hint: "Modern companies also worry about this.",
+    correction: "Answer: public relations."
+  },
+  {
+    type: "vocab",
+    title: "THE MOUTH IN THE WALL",
+    prompt: [
+      "A mouth appears in the wall and refuses to be normal.",
+      "English question: What is the Latin word for mouth?",
+      "Answer with one Latin word."
+    ],
+    answers: ["os"],
+    success: "os. paries loquitur.",
+    hint: "Two letters.",
+    correction: "Answer: os."
+  },
+  {
+    type: "history",
+    title: "THE STADIUM OF GORE",
+    prompt: [
+      "The sand under your feet whispers about gladiators.",
+      "English question: The Colosseum held about how many spectators?",
+      "Answer with the number."
+    ],
+    answers: ["50000", "50,000", "fifty thousand"],
+    success: "Correct.",
+    hint: "Five followed by four zeroes.",
+    correction: "Answer: 50,000."
+  },
+  {
+    type: "vocab",
+    title: "THE COMMANDING GHOST",
+    prompt: [
+      "Ghost General Marcellus points to the door.",
+      "English question: What is the Latin command 'enter'?",
+      "Answer with one Latin word."
+    ],
+    answers: ["intra", "intrate"],
+    success: "intra. ianua paret.",
+    hint: "Singular command is best, but plural is accepted.",
+    correction: "Answer: intra."
+  },
+  {
+    type: "history",
+    title: "THE ANIMAL OPENING CEREMONY",
+    prompt: [
+      "A very nervous ostrich hands you a ticket.",
+      "English question: At the Colosseum's grand opening, about how many animals were slaughtered?",
+      "Answer with the number."
+    ],
+    answers: ["5000", "5,000", "five thousand"],
+    success: "Correct.",
+    hint: "Five thousand.",
+    correction: "Answer: 5,000."
+  },
+  {
+    type: "vocab",
+    title: "THE AQUA ROBOT",
+    prompt: [
+      "A thirsty robot made of aqueduct stones rolls toward you.",
+      "English question: What is the Latin word for water as something you drink?",
+      "Answer with one Latin word."
+    ],
+    answers: ["aquam", "aqua"],
+    success: "aquam. robotus bibit.",
+    hint: "In the class food list, it appears as aquam.",
+    correction: "Answer: aquam."
+  },
+  {
+    type: "history",
+    title: "THE LONGEST SCROLL",
+    prompt: [
+      "A column spirals upward like a history noodle.",
+      "English question: Which emperor's column is described as a long scroll of continuous narration?",
+      "Answer with one name."
+    ],
+    answers: ["trajan", "trajan's", "trajanus"],
+    success: "Correct.",
+    hint: "His empire reached its greatest size.",
+    correction: "Answer: Trajan."
+  },
+  {
+    type: "vocab",
+    title: "THE CRUSTULUM TRIAL",
+    prompt: [
+      "Judge Crustulus Maximus demands dessert law.",
+      "English question: What is the Latin classroom word for cookie?",
+      "Answer with one Latin word."
+    ],
+    answers: ["crustulum", "crustula"],
+    success: "crustulum. iudex placatus est.",
+    hint: "It starts with crust-.",
+    correction: "Answer: crustulum."
+  },
+  {
+    type: "history",
+    title: "OUR SEA",
+    prompt: [
+      "A fish wearing a toga rises from the Mediterranean.",
+      "English question: What did Romans call the Mediterranean Sea?",
+      "Answer in Latin or English."
+    ],
+    answers: ["mare nostrum", "our sea"],
+    success: "Correct.",
+    hint: "It means our sea.",
+    correction: "Answer: Mare Nostrum."
+  },
+  {
+    type: "vocab",
+    title: "THE BOOKSHELF SENATE",
+    prompt: [
+      "Tiny senators hold a meeting on a bookshelf.",
+      "English question: What is the Latin classroom word for bookshelf?",
+      "Answer with one Latin word."
+    ],
+    answers: ["pegma"],
+    success: "pegma. senatores parvi sedent.",
+    hint: "It starts with p.",
+    correction: "Answer: pegma."
+  },
+  {
+    type: "history",
+    title: "THE PEACE ALTAR",
+    prompt: [
+      "An altar hums quietly, trying very hard to be stable.",
+      "English question: What is the Latin name for the Roman Peace?",
+      "Answer with two words."
+    ],
+    answers: ["pax romana", "roman peace"],
+    success: "Correct.",
+    hint: "It means Roman Peace.",
+    correction: "Answer: Pax Romana."
+  },
+  {
+    type: "vocab",
+    title: "THE RUNNING STATUE",
+    prompt: [
+      "A statue suddenly starts jogging in sandals.",
+      "English question: What is the Latin command 'run'?",
+      "Answer with one Latin word."
+    ],
+    answers: ["curre", "currite"],
+    success: "curre. statua sudat.",
+    hint: "Singular command is best, but plural is accepted.",
+    correction: "Answer: curre."
+  },
+  {
+    type: "history",
+    title: "THE PERFECT CIRCLE",
+    prompt: [
+      "You enter a dome. The ceiling looks like impossible math.",
+      "English question: The Pantheon is based on what perfect shape?",
+      "Answer with one English word."
+    ],
+    answers: ["circle", "a circle", "perfect circle"],
+    success: "Correct.",
+    hint: "Round. Very round.",
+    correction: "Answer: circle."
+  },
+  {
+    type: "vocab",
+    title: "THE NOISELESS PRIEST",
+    prompt: [
+      "A priest of silence taps the desk.",
+      "English question: What Latin phrase means 'keep silence'?",
+      "Answer with the Latin phrase."
+    ],
+    answers: ["favete linguis", "favete linguae"],
+    success: "favete linguis. silentium triumphat.",
+    hint: "Two words. Starts with favete.",
+    correction: "Answer: favete linguis."
+  },
+  {
+    type: "history",
+    title: "THE EYE OF THE PANTHEON",
+    prompt: [
+      "A beam of sunlight lands on your shoe.",
+      "English question: What is the only source of light in the Pantheon?",
+      "Answer with one English word."
+    ],
+    answers: ["oculus", "the oculus"],
+    success: "Correct.",
+    hint: "It means eye.",
+    correction: "Answer: oculus."
+  },
+  {
+    type: "vocab",
+    title: "THE LEFT-RIGHT DEMON",
+    prompt: [
+      "A demon with two sandals asks for directions.",
+      "English question: What is the Latin word for right, as in 'to the right'?",
+      "Answer with one Latin word."
+    ],
+    answers: ["dextram", "dextra"],
+    success: "dextram. daemon recte ambulat.",
+    hint: "Ad laevam / ad dextram.",
+    correction: "Answer: dextram."
+  },
+  {
+    type: "history",
+    title: "THE ROAD TO THE EAST",
+    prompt: [
+      "A road of stones stretches out like a command.",
+      "English question: What ancient road was Rome's gateway to the east?",
+      "Answer with two English words."
+    ],
+    answers: ["appian way", "the appian way", "via appia"],
+    success: "Correct.",
+    hint: "It starts with A.",
+    correction: "Answer: Appian Way."
+  },
+  {
+    type: "vocab",
+    title: "THE FINAL CLASSROOM OBJECT",
+    prompt: [
+      "Archivist Claudia Quarta holds up a book.",
+      "English question: What is the Latin classroom word for book?",
+      "Answer with one Latin word."
+    ],
+    answers: ["liber"],
+    success: "liber. memoria servatur.",
+    hint: "It begins with lib-.",
+    correction: "Answer: liber."
+  },
+  {
+    type: "history",
+    title: "THE UNDERGROUND CITY",
+    prompt: [
+      "A ladder descends into cool tunnels full of old names.",
+      "English question: The video says the catacombs were not hideouts. They were budget underground what?",
+      "Answer with one English word."
+    ],
+    answers: ["cemeteries", "cemetery"],
+    success: "Correct.",
+    hint: "Places for burying the dead.",
+    correction: "Answer: cemeteries."
+  },
+  {
+    type: "vocab",
+    title: "THE LAST GOODBYE",
+    prompt: [
+      "The archive doors begin to close. A goat in a tiny toga waves.",
+      "English question: What is the Latin goodbye for one person?",
+      "Answer with one Latin word."
+    ],
+    answers: ["vale"],
+    success: "vale. capra lacrimat.",
+    hint: "Singular goodbye.",
+    correction: "Answer: vale."
+  },
+  {
+    type: "history",
+    title: "THE CHRISTIAN EMPEROR",
+    prompt: [
+      "The final scroll glows with a cross-shaped error message.",
+      "English question: Which emperor legalized Christianity after taking power in 312?",
+      "Answer with one name."
+    ],
+    answers: ["constantine", "constantinus"],
+    success: "Correct.",
+    hint: "His mother was Helena.",
+    correction: "Answer: Constantine."
+  }
+];
 
 function say(text = "") {
   output.innerHTML += text + "<br>";
@@ -36,7 +509,13 @@ function resetInput() {
 }
 
 function normalize(s) {
-  return s.trim().toLowerCase();
+  return s
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[.,!?;:()[\]{}"']/g, "")
+    .replace(/\s+/g, " ");
 }
 
 function addItem(item) {
@@ -44,713 +523,199 @@ function addItem(item) {
 }
 
 function statusLine() {
-  say(`vitae: ${lives} | puncta: ${score} | res: ${inventory.join(", ") || "nihil"}`);
+  say(`YEARS CONSERVED: ${score} / ${MAX_SCORE}`);
+  say(`relics: ${inventory.join(", ") || "nihil"}`);
   say("");
-}
-
-function loseLife() {
-  lives--;
-  if (lives > 0) {
-    say("male.");
-    say("cancer ambulat per parietem et te mordet.");
-    say(`vitae reliquae: ${lives}`);
-    say("");
-    return false;
-  } else {
-    say("male.");
-    say("sacerdotes glitchiani te in murum digitalem trudunt.");
-    say("ludus finitus est.");
-    state = "gameover";
-    return true;
-  }
-}
-
-function succeed(text, points = 10) {
-  say(text);
-  score += points;
-  say("");
-}
-
-function fail(text) {
-  say(text);
-  say("");
-  if (!loseLife()) {
-    promptState();
-  }
-}
-
-function winGame() {
-  say("ianua ultima tremit.");
-  say("luna ipsa descendit.");
-  say("capra gerens ocularia nigra iterum apparet.");
-  say("sacerdotes glitchiani genua flectunt.");
-  say("crustulum infinitum et coupon prandii capis.");
-  say("");
-  say("vincis.");
-  statusLine();
-  state = "gameover";
 }
 
 function startGame() {
   say("============================================================");
-  say("               CAVERNA LUNAE GLITCHIANA");
+  say("        ARCHIVUM ROMAE: THE 2778-YEAR MEMORY CRISIS");
   say("============================================================");
-  say("nox est.");
-  say("sub schola ianua argentea apparet.");
-  say("capra cum oculariis nigris dicit: salve.");
   say("");
-  say("quid tibi nomen est?");
-  state = "name";
+  say("You are a junior historian in the basement archive of Rome.");
+  say("A goat in a toga has chewed holes in history.");
+  say("If you answer well, years of Roman memory are conserved.");
+  say("If you answer poorly, future people will think the Pantheon was a pizza oven.");
+  say("");
+  say("Maximum possible score: 2778 years conserved.");
+  say("Questions alternate: Latin vocab, Rick Steves Rome history, Latin vocab, history...");
+  say("");
+  say("What is your historian name?");
 }
 
-function promptState() {
-  switch (state) {
-    case "room1":
-      say("tres globuli super mensam sunt.");
-      say("scribe: luna / caseus / fiscus");
-      break;
+function askQuestion() {
+  if (qIndex >= questions.length) {
+    winGame();
+    return;
+  }
 
-    case "room2":
-      say("speculum nigrum susurrat.");
-      say("scribe verbum valedictionis.");
-      break;
+  const q = questions[qIndex];
 
-    case "room3":
-      say("vox dicit: surge.");
-      say("quid facis?");
-      break;
+  say("------------------------------------------------------------");
+  say(`ARCHIVE ${qIndex + 1} / ${questions.length}: ${q.title}`);
+  say(`category: ${q.type === "vocab" ? "LATIN VOCAB" : "ROME HISTORY"}`);
+  say("");
 
-    case "room4":
-      say("alia vox clamat: curre.");
-      say("quid facis?");
-      break;
+  q.prompt.forEach(line => say(line));
+  say("");
 
-    case "room5":
-      say("post currendum larva placida dicit: conside.");
-      say("quid facis?");
-      break;
-
-    case "room6":
-      say("super mensa sunt liber, calamus, cummi.");
-      say("quid capis?");
-      break;
-
-    case "room7":
-      say("in pariete scriptum est: quid est hoc?");
-      say("scribe verbum interrogativum.");
-      break;
-
-    case "room8":
-      say("ostium aeneum dicit: da mihi verbum pro yes.");
-      break;
-
-    case "room9":
-      say("ostium iterum dicit: da mihi verbum pro no.");
-      break;
-
-    case "room10":
-      say("robotus ferrivector stat in flumine pensi domestici.");
-      say("sitis est.");
-      say("quid vis?");
-      break;
-
-    case "room11":
-      say("in tenebris vox dicit: aperi os.");
-      say("scribe partem corporis.");
-      break;
-
-    case "room12":
-      say("soccus gigas rotans dicit: veni huc.");
-      say("quid facis?");
-      break;
-
-    case "room13":
-      say("eodem momento alius soccus clamat: exi hinc.");
-      say("quid facis?");
-      break;
-
-    case "room14":
-      say("avis compta cravataque te intuetur.");
-      say("super sella sunt panis, lac, crustulum.");
-      say("quid vis edere?");
-      break;
-
-    case "room15":
-      say("luna picta quaerit:");
-      say("ubi es?");
-      say("scribe uno verbo.");
-      break;
-
-    case "room16":
-      say("tabula magna ante te est.");
-      say("vox dicit: scribe in tabula.");
-      say("quid scribis?");
-      break;
-
-    case "room17":
-      say("ianua ossibus facta petit nomen rei scholasticae.");
-      say("in ea discipulus consedit.");
-      say("quid est?");
-      break;
-
-    case "room18":
-      say("in cubiculo vento pleno fenestra tremit.");
-      say("vox dicit: aperi ____.");
-      say("scribe rem.");
-      break;
-
-    case "room19":
-      say("fenestra nunc aperta est.");
-      say("vox dicit: claude ____.");
-      say("scribe eandem rem.");
-      break;
-
-    case "room20":
-      say("sacerdos glitchianus ad tabulam scriptoria venit.");
-      say("is dicit: audi.");
-      say("quid facis?");
-      break;
-
-    case "room21":
-      say("idem sacerdos dicit: loquere latine.");
-      say("quid facis?");
-      break;
-
-    case "room22":
-      say("in solo sunt duae res: bulga et capsula.");
-      say("quid est backpack?");
-      say("scribe uno verbo.");
-      break;
-
-    case "room23":
-      say("per parietem ambulat umbra.");
-      say("quid vides?");
-      say("scribe uno verbo.");
-      break;
-
-    case "room24":
-      say("magnum ostium geographicum apparet.");
-      say("sacerdos quaerit: quae patria est italia?");
-      say("scribe latine.");
-      break;
-
-    case "room25":
-      say("sacerdos iterum quaerit: quae patria est graecia?");
-      say("scribe latine.");
-      break;
-
-    case "room26":
-      say("nunc sacerdos vult aquam.");
-      say("quid vult bibere?");
-      say("scribe uno verbo.");
-      break;
-
-    case "room27":
-      say("deinde vult panem.");
-      say("quid vult edere?");
-      say("scribe uno verbo.");
-      break;
-
-    case "room28":
-      say("spectrum scholasticum clamat: quot bulgae?");
-      say("respondere non potes numero anglico.");
-      say("scribe numerum latinum pro three.");
-      break;
-
-    case "room29":
-      say("capra redit.");
-      say("dicit: quomodo dicis hello pluribus?");
-      say("scribe uno verbo.");
-      break;
-
-    case "room30":
-      say("in medio conclavis sacerdos glitchianus sedet super pegma.");
-      say("si vis transire, dic verbo uno quid faciat discipulus bonus.");
-      say("options latent in schola.");
-      break;
-
-    case "room31":
-      say("sacerdos murmurat: quid est here?");
-      say("scribe uno verbo latine.");
-      break;
-
-    case "room32":
-      say("murmurat iterum: quid est there?");
-      say("scribe uno verbo latine.");
-      break;
-
-    case "room33":
-      say("super caput tuum luna falsa dicit: quid est book?");
-      say("scribe uno verbo.");
-      break;
-
-    case "room34":
-      say("in extrema ianua ignis viridis ardet.");
-      say("ianua poscit verbum ultimum.");
-      say("scribe imperativum pro come.");
-      break;
-
-    case "boss1":
-      say("sacerdotes glitchiani surgunt.");
-      say("maximus eorum dicit: quid est your name?");
-      say("sed nolo sententiam longam.");
-      say("scribe verbum solum quo me vocant.");
-      break;
-
-    case "boss2":
-      say("sacerdos secundus dicit: quid est i am here?");
-      say("scribe uno verbo.");
-      break;
-
-    case "boss3":
-      say("sacerdos tertius dicit: quid facis si magister dicit revertere?");
-      say("scribe uno verbo.");
-      break;
-
-    case "boss4":
-      say("omnes simul clamant: vale an salve?");
-      say("si vis finem, elige recte.");
-      break;
+  if ((qIndex + 1) % 6 === 0) {
+    say(`Current score before this question: ${score} / ${MAX_SCORE}`);
+    say("");
   }
 }
 
-function handleState(answer) {
-  switch (state) {
-    case "name":
-      if (answer) playerName = answer;
-      say("");
-      say(`salve, ${playerName}.`);
-      say("capra ridet.");
-      say('"noli timere," dicit, "sed fortasse time."');
-      say("");
-      state = "room1";
-      promptState();
-      return;
+function correctAnswer() {
+  const q = questions[qIndex];
+  const basePoints = pointsForQuestion(qIndex);
+  const earned = tries === 0 ? basePoints : Math.ceil(basePoints / 2);
 
-    case "room1":
-      if (answer === "luna") {
-        flags.viditLunam = true;
-        succeed("globulus lunae tremit. scala apparet.", 5);
-        state = "room2";
-        promptState();
-      } else {
-        fail("nihil bene fit.");
-      }
-      return;
+  score += earned;
+  conserved.push(qIndex + 1);
 
-    case "room2":
-      if (answer === "vale" || answer === "valete") {
-        flags.dixitVale = true;
-        succeed("speculum aperitur sicut aqua nigra.");
-        state = "room3";
-        promptState();
-      } else {
-        fail("speculum irascitur.");
-      }
-      return;
+  if (q.type === "vocab") {
+    addItem(q.answers[0]);
+  }
 
-    case "room3":
-      if (answer === "surgo") {
-        succeed("recte. surgis.");
-        state = "room4";
-        promptState();
-      } else {
-        fail("non surgis.");
-      }
-      return;
+  say(q.success);
+  say(`+${earned} years conserved.`);
+  say("");
 
-    case "room4":
-      if (answer === "curro") {
-        succeed("recte. curris. pavimentum ululat.");
-        state = "room5";
-        promptState();
-      } else {
-        fail("tardus es.");
-      }
-      return;
+  qIndex++;
+  tries = 0;
 
-    case "room5":
-      if (answer === "consido") {
-        succeed("recte. consides. sella tamen respirat.");
-        state = "room6";
-        promptState();
-      } else {
-        fail("sella te odit.");
-      }
-      return;
+  if (qIndex === 12 || qIndex === 24 || qIndex === 30) {
+    say("A Roman clerk with ink on his elbows checks the score tablet.");
+    statusLine();
+  }
 
-    case "room6":
-      if (answer === "calamum" || answer === "calamus") {
-        flags.habesCalamum = true;
-        addItem("calamus");
-        succeed("calamum capis. bene.", 12);
-        state = "room7";
-        promptState();
-      } else {
-        fail("res falsa est.");
-      }
-      return;
+  askQuestion();
+}
 
-    case "room7":
-      if (answer === "quid") {
-        succeed("verbum rectum est. paries finditur.");
-        state = "room8";
-        promptState();
-      } else {
-        fail("paries manet.");
-      }
-      return;
+function wrongAnswer() {
+  const q = questions[qIndex];
 
-    case "room8":
-      if (answer === "ita") {
-        succeed("ostium inclinatur.");
-        state = "room9";
-        promptState();
-      } else {
-        fail("ostium negat.");
-      }
-      return;
+  if (tries === 0) {
+    tries++;
+    say(q.type === "vocab" ? "non." : "No.");
+    say(`Hint: ${q.hint}`);
+    say("Try once more.");
+    say("");
+    askShortRetry();
+  } else {
+    say(q.type === "vocab" ? "minime." : "No.");
+    say(q.correction);
+    say("0 years conserved for this archive.");
+    say("");
 
-    case "room9":
-      if (answer === "non" || answer === "minime") {
-        succeed("ostium tandem aperitur.");
-        state = "room10";
-        promptState();
-      } else {
-        fail("ostium nimis positivum est.");
-      }
-      return;
+    qIndex++;
+    tries = 0;
+    askQuestion();
+  }
+}
 
-    case "room10":
-      if (answer === "aquam") {
-        addItem("aqua");
-        succeed("robotus tibi poculum aquae dat et transitum concedit.");
-        state = "room11";
-        promptState();
-      } else {
-        fail("robotus caput ferreum quatit.");
-      }
-      return;
+function askShortRetry() {
+  const q = questions[qIndex];
+  say(`ARCHIVE ${qIndex + 1}, second attempt: ${q.title}`);
+  say(q.prompt[q.prompt.length - 1]);
+  say("");
+}
 
-    case "room11":
-      if (answer === "os") {
-        succeed("recte. tenebrae te non comedunt.");
-        state = "room12";
-        promptState();
-      } else {
-        fail("tenebrae os tuum quaerunt.");
-      }
-      return;
+function winGame() {
+  say("============================================================");
+  say("                  ARCHIVE COMPLETE");
+  say("============================================================");
+  say("");
+  say("The goat in the toga stops chewing history.");
+  say("Romulus and Remus nod from a suspiciously damp cloud.");
+  say("The Pantheon is not remembered as a pizza oven.");
+  say("Marcus Aurelius gives you one silent thumbs-up.");
+  say("");
 
-    case "room12":
-      if (answer === "venio") {
-        succeed("soccus laetus salit.");
-        state = "room13";
-        promptState();
-      } else {
-        fail("soccus lacrimat.");
-      }
-      return;
+  say(`FINAL SCORE: ${score} / ${MAX_SCORE} years conserved.`);
 
-    case "room13":
-      if (answer === "exeo" || answer === "abeo") {
-        succeed("optime. soccus alter evanescit.");
-        state = "room14";
-        promptState();
-      } else {
-        fail("soccus adhuc clamat.");
-      }
-      return;
+  const percent = Math.round((score / MAX_SCORE) * 100);
 
-    case "room14":
-      if (answer === "crustulum") {
-        flags.habesCrustulum = true;
-        addItem("crustulum");
-        succeed("avis graviter annuit. crustulum tibi est.");
-        state = "room15";
-        promptState();
-      } else {
-        fail("avis te iudicat.");
-      }
-      return;
+  if (score === MAX_SCORE) {
+    say("TITLE: CONSERVATOR MAXIMUS.");
+    say("All 2778 years of Rome are safe.");
+  } else if (percent >= 90) {
+    say("TITLE: HISTORIAN OF MARBLE.");
+    say("Almost all of Rome survives.");
+  } else if (percent >= 75) {
+    say("TITLE: SENATOR OF ACCEPTABLE MEMORY.");
+    say("Rome survives with some suspicious holes.");
+  } else if (percent >= 50) {
+    say("TITLE: JUNIOR SCRIBE OF THE HALF-BURNED SCROLL.");
+    say("Future people know Rome existed, but they are confused.");
+  } else {
+    say("TITLE: GOAT ASSISTANT.");
+    say("Future people believe Caesar invented traffic cones.");
+  }
 
-    case "room15":
-      if (answer === "hic") {
-        succeed("luna picta semel palpebrat.");
-        state = "room16";
-        promptState();
-      } else {
-        fail("luna te non invenit.");
-      }
-      return;
+  say("");
+  say(`Correct archives: ${conserved.length} / ${questions.length}`);
+  say(`Relics collected: ${inventory.join(", ") || "nihil"}`);
+  say("");
+  say("ludus finitus est.");
+  state = "gameover";
+}
 
-    case "room16":
-      if (answer === "domum") {
-        succeed("tabula gaudet quod domum scribis.");
-        state = "room17";
-        promptState();
-      } else {
-        fail("creta sola gemit.");
-      }
-      return;
+function handleInput(raw) {
+  const answer = normalize(raw);
 
-    case "room17":
-      if (answer === "sella") {
-        succeed("ossa recedunt.");
-        state = "room18";
-        promptState();
-      } else {
-        fail("ossa manent.");
-      }
-      return;
+  if (state === "name") {
+    playerName = raw.trim() || "historian";
+    say("");
+    say(`salve, ${playerName}.`);
+    say("Archivist Fabia Pullaria hands you a lamp, a stylus, and one emotionally unstable olive.");
+    say("");
+    state = "playing";
+    askQuestion();
+    return;
+  }
 
-    case "room18":
-      if (answer === "fenestram" || answer === "fenestra") {
-        succeed("ventus intrat et cantat.");
-        state = "room19";
-        promptState();
-      } else {
-        fail("ventus te irridet.");
-      }
-      return;
+  if (state === "gameover") return;
 
-    case "room19":
-      if (answer === "fenestram" || answer === "fenestra") {
-        succeed("silentium fit subito.");
-        state = "room20";
-        promptState();
-      } else {
-        fail("fenestra tremit magis.");
-      }
-      return;
+  const q = questions[qIndex];
+  const acceptable = q.answers.map(a => normalize(a));
 
-    case "room20":
-      if (answer === "audio") {
-        succeed("sacerdos dicit: tandem.");
-        state = "room21";
-        promptState();
-      } else {
-        fail("sacerdos putat te surdum esse.");
-      }
-      return;
-
-    case "room21":
-      if (answer === "loquor") {
-        succeed("sacerdos parum ridet.");
-        state = "room22";
-        promptState();
-      } else {
-        fail("barbarus videris.");
-      }
-      return;
-
-    case "room22":
-      if (answer === "bulga" || answer === "saccus") {
-        succeed("recte. bulga aperitur et fumus exit.");
-        state = "room23";
-        promptState();
-      } else {
-        fail("capsula mordet.");
-      }
-      return;
-
-    case "room23":
-      if (answer === "umbram" || answer === "umbra") {
-        succeed("umbra te sinit transire.");
-        state = "room24";
-        promptState();
-      } else {
-        fail("umbra crescit.");
-      }
-      return;
-
-    case "room24":
-      if (answer === "italia") {
-        succeed("terra sub pedibus tuis paulum cantat.");
-        state = "room25";
-        promptState();
-      } else {
-        fail("mappa rugit.");
-      }
-      return;
-
-    case "room25":
-      if (answer === "graecia") {
-        succeed("mappa iterum quiescit.");
-        state = "room26";
-        promptState();
-      } else {
-        fail("litterae in muro ruunt.");
-      }
-      return;
-
-    case "room26":
-      if (answer === "aquam") {
-        succeed("sacerdos aquam bibit sine facie.");
-        state = "room27";
-        promptState();
-      } else {
-        fail("sacerdos sitit adhuc.");
-      }
-      return;
-
-    case "room27":
-      if (answer === "panem") {
-        succeed("sacerdos panem edit et minus terribilis fit.");
-        state = "room28";
-        promptState();
-      } else {
-        fail("venter sacerdotis fremit.");
-      }
-      return;
-
-    case "room28":
-      if (answer === "tres") {
-        succeed("numerus rectus est.");
-        state = "room29";
-        promptState();
-      } else {
-        fail("numeri te deserunt.");
-      }
-      return;
-
-    case "room29":
-      if (answer === "salvete") {
-        succeed("capra inclinat caput. satis bene.");
-        state = "room30";
-        promptState();
-      } else {
-        fail("capra offenditur.");
-      }
-      return;
-
-    case "room30":
-      if (answer === "audit" || answer === "scribit" || answer === "legit") {
-        succeed("sacerdos dicit: fortasse discipulus bonus es.", 15);
-        state = "room31";
-        promptState();
-      } else {
-        fail("sacerdos dicit: minime.");
-      }
-      return;
-
-    case "room31":
-      if (answer === "hic") {
-        succeed("primum verbum transit.");
-        state = "room32";
-        promptState();
-      } else {
-        fail("verbum cadit.");
-      }
-      return;
-
-    case "room32":
-      if (answer === "illic") {
-        succeed("secundum verbum transit.");
-        state = "room33";
-        promptState();
-      } else {
-        fail("longinquitas clausa est.");
-      }
-      return;
-
-    case "room33":
-      if (answer === "liber") {
-        succeed("luna falsa frangitur. vera luna apparet.");
-        state = "room34";
-        promptState();
-      } else {
-        fail("luna falsa mendax manet.");
-      }
-      return;
-
-    case "room34":
-      if (answer === "veni") {
-        succeed("ianua ultima aperitur.");
-        state = "boss1";
-        promptState();
-      } else {
-        fail("ianua te spernit.");
-      }
-      return;
-
-    case "boss1":
-      if (answer === "nomen") {
-        succeed("primus sacerdos tacet.");
-        state = "boss2";
-        promptState();
-      } else {
-        fail("primus sacerdos ridet metallice.");
-      }
-      return;
-
-    case "boss2":
-      if (answer === "adsum") {
-        succeed("secundus sacerdos retro abit.");
-        state = "boss3";
-        promptState();
-      } else {
-        fail("secundus sacerdos negat praesentiam tuam.");
-      }
-      return;
-
-    case "boss3":
-      if (answer === "revertor") {
-        succeed("tertius sacerdos evanescit in glitch.", 20);
-        state = "boss4";
-        promptState();
-      } else {
-        fail("tertius sacerdos manet.");
-      }
-      return;
-
-    case "boss4":
-      if (answer === "vale") {
-        flags.sacerdosPlacatus = true;
-        succeed("omnes sacerdotes respondent: vale.", 25);
-        winGame();
-      } else {
-        fail("finis nondum venit.");
-      }
-      return;
+  if (acceptable.includes(answer)) {
+    correctAnswer();
+  } else {
+    wrongAnswer();
   }
 }
 
 answerBox.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    submitBtn.click();
-  }
-});
+  if (e.key !== "Enter") return;
+  if (state === "gameover") return;
 
-startGame();
-promptLine();
-resetInput();
+  const val = answerBox.value;
+  echoInput(val);
+  answerBox.value = "";
+
+  if (!val.trim()) {
+    say("type something, o historian.");
+    say("");
+    promptLine();
+    resetInput();
+    return;
+  }
+
+  handleInput(val);
+
+  if (state !== "gameover") {
+    promptLine();
+  }
+
+  resetInput();
+});
 
 document.body.addEventListener("click", () => answerBox.focus());
 window.addEventListener("load", () => answerBox.focus());
 
-answerBox.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    if (state === "gameover") return;
-
-    const val = answerBox.value.trim().toLowerCase();
-    echoInput(val);
-    answerBox.value = "";
-
-    if (!val && state !== "name") {
-      say("scribe aliquid.");
-      say("");
-      promptLine();
-      resetInput();
-      return;
-    }
-
-    handleState(val);
-
-    if (state !== "gameover") {
-      promptLine();
-    }
-
-    resetInput();
-  }
-});
+startGame();
+promptLine();
+resetInput();
