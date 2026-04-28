@@ -1072,14 +1072,12 @@ function startGame() {
   say("The lamps are smoking. The shelves are taller than school.");
   say("A mouse in a senator's toga is chewing a very important page.");
   say("");
-  say("Then Edward Gibbon appears.");
-  say("He is wearing a powdered wig, carrying too many notes, and looking like he has personally been disappointed by the third century.");
+  say("Then Edward Gibbon appears. He is wearing a powdered wig, carrying too many notes, and looking like he has personally been disappointed by the third century.");
   say("");
   say('"Young historian," he says, "I wrote many, many pages about Rome."');
   say('"Sadly, a mouse has eaten several centuries."');
   say("");
-  say("Gibbon was an English historian. His huge book, The Decline and Fall of the Roman Empire, tried to explain how Rome went from world-ruling monster to historical mystery.");
-  say("He liked big ideas: emperors, barbarians, religion, armies, corruption, taxes, provinces, and sentences long enough to need furniture.");
+  say("(Gibbon was an English historian. His huge book, The Decline and Fall of the Roman Empire, tried to explain how Rome went from world-ruling monster to historical mystery. He liked big ideas: emperors, barbarians, religion, armies, corruption, taxes, provinces, and sentences long enough to need furniture.)");
   say("");
   say("Your mission: help Gibbon restore the history!");
   say("");
