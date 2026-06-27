@@ -95,7 +95,7 @@
   </style>
 </head>
 <body>
-  <a class="back-link" href="index.html">← Back</a>
+  <a class="back-link" href="index.html">← Home</a>
   
   <div class="container">
     <h1>
@@ -118,7 +118,7 @@
       deckList.innerHTML = '';
       for (let i = 1; i <= 135; i++) {
         const link = document.createElement('a');
-        link.href = `index.html?deck=${i}`;
+        link.href = `flashcards.html?deck=${i}`;
         link.textContent = titles[i] || `Deck ${i}`;
         deckList.appendChild(link);
       }
